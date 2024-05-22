@@ -3,17 +3,17 @@
 \name{subset,ftmglm-method}
 \alias{subset,ftmglm-method}
 \alias{subset,ftmlm-method}
-\alias{[,ftmglm,ANY,ANY,ANY-method}
-\alias{[,ftmlm,ANY,ANY,ANY-method}
+\alias{[,ftmglm-method}
+\alias{[,ftmlm-method}
 \title{Extract/Subset the variables used in a ftmglm or ftmlm object}
 \usage{
 \S4method{subset}{ftmglm}(x, subset)
 
 \S4method{subset}{ftmlm}(x, subset)
 
-\S4method{[}{ftmglm,ANY,ANY,ANY}(x, i, j)
+\S4method{[}{ftmglm}(x, i, j)
 
-\S4method{[}{ftmlm,ANY,ANY,ANY}(x, i, j)
+\S4method{[}{ftmlm}(x, i, j)
 }
 \arguments{
 \item{x}{Object of class inheriting from \code{ftmglm} or \code{ftmlm}.}
