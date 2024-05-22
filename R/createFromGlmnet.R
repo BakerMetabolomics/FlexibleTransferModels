@@ -1,0 +1,105 @@
+#' @title Create a Flexible Transfer Model (ftmglm or ftmlm) from a glmnet object
+#'
+#' @description This function extracts necessary components from a glmnet object (either cv.glmnet or glmnet)
+#' to create an ftmglm object. It uses the optimal, or specified, penalty parameter (lambda) and the data used in
+#' the glmnet model to adapt them into the FTM framework.
+#'
+#' @param glmnetObj a cv.glmnet or glmnet object from the glmnet package
+#' @param s value of the penalty parameter (lambda) to use; default for cv.glmnet is lambda.min
+#'
+#' @return A ftmglm or ftmlm object.
+#'
+#' @note The data used in the glmnet model must be available in the global environment.
+#'
+#' @examples
+#' \dontrun{
+#' # Fitting a glmnet model to the mtcars dataset
+#' data(mtcars)
+#' predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
+#' glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
+#' ftmglm_model <- createFromGlmnet(glmnet_model)
+#' }
+#' @export
+createFromGlmnet <- function(glmnetObj, s = NULL) {
+
+    # Validation for glmnetObj
+    if (!inherits(glmnetObj, c("cv.glmnet", "glmnet"))) {
+        stop(sprintf("glmnetObj must be a cv.glmnet or glmnet object. Provided object class: %s", class(glmnetObj)))
+    }
+
+    # Determine the lambda to use
+    if (is.null(s)) {
+        if (inherits(glmnetObj, "cv.glmnet")) {
+            s <- glmnetObj$lambda.min
+        } else {
+            stop("s must be specified for glmnet objects unless a cv.glmnet object is provided.")
+        }
+    }
+    # Convert "lambda.min" or "lambda.1se" to numeric
+    if (is.character(s)) {
+
+        # Ensure that s is either "lambda.min" or "lambda.1se"
+        if (!s %in% c("lambda.min", "lambda.1se")) {
+            stop("s must be either a numeric value, 'lambda.min' or 'lambda.1se'.")
+        }
+
+        # Extract the lambda values from the glmnet object
+        s <- glmnetObj[[s]]
+    }
+
+    # Ensure that we can extract the predictors and outcome
+    predictors <- eval(glmnetObj$call[["x"]], envir = parent.frame())
+    outcome <- eval(glmnetObj$call[["y"]], envir = parent.frame())
+
+    # Error if either the predictors or outcome are not found
+    if (is.null(predictors) || is.null(outcome)) {
+        stop("Unable to extract predictors and outcome from glmnet object. Ensure the data used to fit the model is loaded in the environment.")
+    }
+
+    # Create a new X matrix that includes the predictors and intercept
+    X <- cbind("intercept" = 1,
+               predictors)
+
+    # Get the outcome variable name
+    outcome_name <- get_outcome_name(glmnetObj)
+
+    # Determine whether the model is a binomial or linear model
+    if (class(glmnetObj$glmnet.fit)[1] == "elnet") {
+
+        # Calculate Xty and XtWX
+        Xty <- t(X) %*% outcome
+        XtX <- t(X) %*% X
+
+        # Update the outcome name
+        colnames(Xty) <- outcome_name
+
+        # Create ftmlm object
+        ftmlm(XtX = XtX, Xty = Xty, s = s)
+
+    } else if (class(glmnetObj$glmnet.fit)[1] == "lognet") {
+
+        # Calculate necessary components
+        p <- predict(glmnetObj, predictors, type = "response", s = s)
+
+        # Calculate the weights
+        w <- p * (1 - p)
+
+        # Calculate the log odds
+        z <- logit(p)
+
+        # Calculate XtWz and XtWX
+        XtWz <- t(X) %*% diag(as.vector(w)) %*% z
+        XtWX <- t(X) %*% diag(as.vector(w)) %*% X
+
+        # Update outcome name
+        colnames(XtWz) <- outcome_name
+
+        # Create ftmglm object
+        return(ftmglm(XtWX = XtWX, XtWz = XtWz))
+
+    } else {
+        # Warn user that the model is not binomial or linear
+        stop(sprintf("glmnetObj must be a binomial or linear model. Provided model is a: %s", class(glmnetObj$glmnet.fit)[1]))
+    }
+
+}

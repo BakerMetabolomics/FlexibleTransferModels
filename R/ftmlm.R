@@ -1,0 +1,49 @@
+#' @title Flexible Transfer Model (FTM) Linear Model Class
+#'
+#' @description An S4 class designed to encapsulate the necessary components for a flexible
+#' transfer model linear model. This class stores matrices that
+#' represent the weighted cross-product of predictors and the cross-product of predictors
+#' with outcomes, essential for the model calculations.
+#'
+#' @section Usage:
+#' This class is internally used by functions within the package to perform
+#' regression analysis. It is not intended for direct use.
+#'
+#' @section Slots:
+#' \describe{
+#'   \item{XtX}{\code{matrix} representing the crossproduct of the predictor variables.}
+#'   \item{Xty}{\code{matrix} representing the crossproduct of the predictor variables and outcomes.}
+#'   \item{s}{\code{numeric} representing the optimal Ridge penalty from cross-validation (if available).}
+#'}
+#'
+#' @export
+setClass("ftmlm",
+         slots = list(XtX = "matrix", Xty = "matrix", s = "ANY"))
+
+
+#' @title Constructor for ftmlm Objects
+#'
+#' @description Creates an instance of the \code{\linkS4class{ftmlm}} class, initializing
+#' it with specific matrices necessary for the flexible transfer model calculations.
+#' This function is typically called internally within higher-level functions that
+#' prepare data and perform model fitting.
+#'
+#' @param XtX A numeric matrix representing the crossproduct of predictors.
+#' @param Xty A numeric matrix representing the crossproduct of predictors and outcomes.
+#' @param s A numeric value representing the optimal Ridge penalty from cross-validation (if available).
+#'
+#' @return An object of class \code{\linkS4class{ftmlm}}.
+#'
+#' @seealso \code{\link{ftmlm-class}} for details on the class structure.
+#' @examples
+#' \dontrun{
+#'   XtX <- matrix(rnorm(100), 10, 10)
+#'   Xty <- matrix(rnorm(10), 10, 1)
+#'   model <- ftmlm(XtX, Xty)
+#' }
+#' @export
+ftmlm <- function(XtX, Xty, s = NULL) {
+    validate_input_input(XtX, Xty, s)
+    new("ftmlm", XtX = XtX, Xty = Xty, s = s)
+}
+
