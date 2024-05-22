@@ -46,7 +46,7 @@ get_outcome_name <- function(glmnetObj) {
 schur_complement <- function(XtX) {
 
     # Get the location of the intercept
-    inter_loc <- which(colnames(XtX) == "intercept")
+    inter_loc <- which(colnames(XtX) == "(Intercept)")
 
     # Get the submatrix
     sub1 <- XtX[-inter_loc, -inter_loc, drop = FALSE]

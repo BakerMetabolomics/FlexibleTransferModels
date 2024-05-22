@@ -4,12 +4,16 @@
 \alias{createFromGlmnet}
 \title{Create a Flexible Transfer Model (ftmglm or ftmlm) from a glmnet object}
 \usage{
-createFromGlmnet(glmnetObj, s = NULL)
+createFromGlmnet(glmnetObj, s = NULL, x = NULL, y = NULL)
 }
 \arguments{
 \item{glmnetObj}{a cv.glmnet or glmnet object from the glmnet package}
 
 \item{s}{value of the penalty parameter (lambda) to use; default for cv.glmnet is lambda.min}
+
+\item{x}{matrix of predictors used in the glmnet model}
+
+\item{y}{vector of outcomes used in the glmnet model}
 }
 \value{
 A ftmglm or ftmlm object.
@@ -28,6 +32,6 @@ The data used in the glmnet model must be available in the global environment.
 data(mtcars)
 predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
 glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
-ftmglm_model <- createFromGlmnet(glmnet_model)
+ftmglm_model <- createFromGlmnet(glmnet_model, x = predictors, y = mtcars$am)
 }
 }

@@ -4,12 +4,16 @@
 \alias{createFTM}
 \title{Create a Flexible Transfer Model (FTM) Object from Different Model Types}
 \usage{
-createFTM(modelObj, s = NULL)
+createFTM(modelObj, s = NULL, x = NULL, y = NULL)
 }
 \arguments{
 \item{modelObj}{A model object from glm, glmnet, or lm.}
 
 \item{s}{Optional value of the penalty parameter (lambda); applicable only for glmnet or lm models.}
+
+\item{x}{matrix of predictors used in the glmnet model.}
+
+\item{y}{vector of outcomes used in the glmnet model.}
 }
 \value{
 An FTM object either of type ftmglm or ftmlm depending on the input model.

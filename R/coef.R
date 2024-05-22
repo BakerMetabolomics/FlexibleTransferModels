@@ -45,8 +45,8 @@ setMethod("coef", "ftmglm",
         }
 
         # Ensure that we select the intercept
-        if (!"intercept" %in% select) {
-            select <- c("intercept", select)
+        if (!"(Intercept)" %in% select) {
+            select <- c("(Intercept)", select)
         }
 
         # Subset object to the intersecting variables
@@ -96,8 +96,8 @@ setMethod("coef", "ftmlm",
         }
 
         # Ensure that we select the intercept
-        if (!"intercept" %in% select) {
-          select <- c("intercept", select)
+        if (!"(Intercept)" %in% select) {
+            select <- c("(Intercept)", select)
         }
 
         # Subset object to the intersecting variables
@@ -111,7 +111,7 @@ setMethod("coef", "ftmlm",
             XtX_comp <- schur_complement(XtX)
 
             # Get the diagonal to use for the ridge penalty
-            ridge_diag <- c(0, s * diag(XtX_comp, nrow = nrow(XtX_comp), ncol = ncol(XtX_comp)))
+            ridge_diag <- c(0, s * diag(XtX_comp))
 
             # Calculate the inverse of XtX + lambda * I, accounting for the scale of variables
             XtX_inv <- solve(XtX + diag(ridge_diag, nrow = nrow(XtX), ncol = ncol(XtX)))

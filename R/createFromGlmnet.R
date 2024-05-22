@@ -6,6 +6,8 @@
 #'
 #' @param glmnetObj a cv.glmnet or glmnet object from the glmnet package
 #' @param s value of the penalty parameter (lambda) to use; default for cv.glmnet is lambda.min
+#' @param x matrix of predictors used in the glmnet model
+#' @param y vector of outcomes used in the glmnet model
 #'
 #' @return A ftmglm or ftmlm object.
 #'
@@ -17,10 +19,10 @@
 #' data(mtcars)
 #' predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
 #' glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
-#' ftmglm_model <- createFromGlmnet(glmnet_model)
+#' ftmglm_model <- createFromGlmnet(glmnet_model, x = predictors, y = mtcars$am)
 #' }
 #' @export
-createFromGlmnet <- function(glmnetObj, s = NULL) {
+createFromGlmnet <- function(glmnetObj, s = NULL, x = NULL, y = NULL) {
 
     # Validation for glmnetObj
     if (!inherits(glmnetObj, c("cv.glmnet", "glmnet"))) {
@@ -35,6 +37,7 @@ createFromGlmnet <- function(glmnetObj, s = NULL) {
             stop("s must be specified for glmnet objects unless a cv.glmnet object is provided.")
         }
     }
+
     # Convert "lambda.min" or "lambda.1se" to numeric
     if (is.character(s)) {
 
@@ -47,27 +50,44 @@ createFromGlmnet <- function(glmnetObj, s = NULL) {
         s <- glmnetObj[[s]]
     }
 
-    # Ensure that we can extract the predictors and outcome
-    predictors <- eval(glmnetObj$call[["x"]], envir = parent.frame())
-    outcome <- eval(glmnetObj$call[["y"]], envir = parent.frame())
+    # Get the outcome variable name
+    if (!is.data.frame(y)) {
+        outcome_name <- get_outcome_name(glmnetObj)
+    } else {
+        outcome_name <- colnames(y)
+    }
 
     # Error if either the predictors or outcome are not found
-    if (is.null(predictors) || is.null(outcome)) {
-        stop("Unable to extract predictors and outcome from glmnet object. Ensure the data used to fit the model is loaded in the environment.")
+    if (is.null(x) || is.null(y)) {
+        stop("The predictors and outcome must be provided.")
+    }
+
+    # Convert the predictors to a matrix if it is a data frame
+    if (!is.matrix(x)) {
+        x <- as.matrix(x)
+    }
+    # Convert the outcome to a vector if it is a vector or data frame
+    if (!is.matrix(y)) {
+        y <- as.matrix(y)
+    }
+    # Ensure the outcome is a single column
+    if (ncol(y) > 1) {
+        stop("The outcome must be a single column.")
+    }
+    # Ensure the number of rows in the predictors and outcome match
+    if (nrow(x) != nrow(y)) {
+        stop("The number of rows in the predictors and outcome must match.")
     }
 
     # Create a new X matrix that includes the predictors and intercept
-    X <- cbind("intercept" = 1,
-               predictors)
-
-    # Get the outcome variable name
-    outcome_name <- get_outcome_name(glmnetObj)
+    X <- cbind("(Intercept)" = 1,
+               x)
 
     # Determine whether the model is a binomial or linear model
     if (class(glmnetObj$glmnet.fit)[1] == "elnet") {
 
         # Calculate Xty and XtWX
-        Xty <- t(X) %*% outcome
+        Xty <- t(X) %*% y
         XtX <- t(X) %*% X
 
         # Update the outcome name
@@ -79,7 +99,7 @@ createFromGlmnet <- function(glmnetObj, s = NULL) {
     } else if (class(glmnetObj$glmnet.fit)[1] == "lognet") {
 
         # Calculate necessary components
-        p <- predict(glmnetObj, predictors, type = "response", s = s)
+        p <- predict(glmnetObj, newx = x, type = "response", s = s)
 
         # Calculate the weights
         w <- p * (1 - p)
@@ -99,7 +119,7 @@ createFromGlmnet <- function(glmnetObj, s = NULL) {
 
     } else {
         # Warn user that the model is not binomial or linear
-        stop(sprintf("glmnetObj must be a binomial or linear model. Provided model is a: %s", class(glmnetObj$glmnet.fit)[1]))
+        stop(sprintf("glmnetObj must be a binomial or linear (gaussian) model. Provided model is a: %s", class(glmnetObj$glmnet.fit)[1]))
     }
 
 }

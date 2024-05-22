@@ -5,6 +5,8 @@
 #'
 #' @param modelObj A model object from glm, glmnet, or lm.
 #' @param s Optional value of the penalty parameter (lambda); applicable only for glmnet or lm models.
+#' @param x matrix of predictors used in the glmnet model.
+#' @param y vector of outcomes used in the glmnet model.
 #'
 #' @return An FTM object either of type ftmglm or ftmlm depending on the input model.
 #' @export
@@ -21,23 +23,24 @@
 #' glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
 #' ftm_object <- createFTM(glmnet_model)
 #' }
-createFTM <- function(modelObj, s = NULL) {
-
-    # Determine if the model is a linear model from lm
-    if (inherits(modelObj, "lm")) {
-        return(createFromLm(modelObj))
-    }
+createFTM <- function(modelObj, s = NULL, x = NULL, y = NULL) {
 
     # Determine if the model is a logistic model from glm
     if (inherits(modelObj, "glm")) {
         return(createFromGlm(modelObj))
     }
 
+    # Determine if the model is a linear model from lm
+    if (inherits(modelObj, "lm")) {
+        return(createFromLm(modelObj))
+    }
+
     # Determine if the model is a glmnet model
-    if (!inherits(modelObj, "glmnet")) {
+    if (!inherits(modelObj, c("glmnet", "cv.glmnet"))) {
         stop(sprintf("modelObj must be a lm, glm, cv.glmnet, or glmnet object. Provided object class: %s", class(modelObj)))
     }
 
     # Create an FTM object from glmnet model
-    return(createFromGlmnet(modelObj, s))
+    return(createFromGlmnet(modelObj, s, x, y))
 }
+

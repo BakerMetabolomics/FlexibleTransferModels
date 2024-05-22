@@ -29,8 +29,10 @@ createFromLm <- function(lmObj) {
     # Extract the model matrix
     X <- model.matrix(formula(lmObj), lmObj$model)
 
-    # Rename the intercept
-    colnames(X)[colnames(X) %in% "(Intercept)"] <- "intercept"
+    # Ensure that an intercept is included
+    if (!any(colnames(X) %in% "(Intercept)")) {
+        stop("An intercept term should be included in the model.")
+    }
 
     # Calculate Xty and XtWX
     Xty <- t(X) %*% y

@@ -29,9 +29,6 @@ createFromGlm <- function(glmObj) {
     # Extract the model matrix
     X <- model.matrix(formula(glmObj), glmObj$data)
 
-    # Rename the intercept
-    colnames(X)[colnames(X) %in% "(Intercept)"] <- "intercept"
-
     # Calculate the weights
     w <- p * (1 - p)
 

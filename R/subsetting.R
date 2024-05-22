@@ -17,15 +17,15 @@ setMethod("subset", "ftmglm", function(x, subset) {
 
     # If subset are numeric, convert to character
     if (is.numeric(subset)) {
-        subset <- colnames(x@XtWz)[subset]
+        subset <- colnames(x@XtWX)[subset]
     }
 
     # Get the intersection of the variables in the model and the subset
-    subset <- intersect(colnames(x@XtWz), subset)
+    subset <- intersect(colnames(x@XtWX), subset)
 
     # Ensure "intercept" is included
-    if (!"intercept" %in% subset) {
-        subset <- c("intercept", subset)
+    if (!"(Intercept)" %in% subset) {
+        subset <- c("(Intercept)", subset)
     }
 
     # Ensure we have more than one variable
@@ -55,8 +55,8 @@ setMethod("subset", "ftmlm", function(x, subset) {
     subset <- intersect(colnames(x@XtX), subset)
 
     # Ensure "intercept" is included
-    if (!"intercept" %in% subset) {
-        subset <- c("intercept", subset)
+    if (!"(Intercept)" %in% subset) {
+        subset <- c("(Intercept)", subset)
     }
 
     # Ensure we have more than one variable
@@ -79,15 +79,15 @@ setMethod("[", "ftmglm", function(x, i, j) {
 
     # If subset are numeric, convert to character
     if (is.numeric(j)) {
-        j <- colnames(x@XtWz)[j]
+        j <- colnames(x@XtWX)[j]
     }
 
     # Get the intersection of the variables in the model and the subset
-    j <- intersect(colnames(x@XtWz), j)
+    j <- intersect(colnames(x@XtWX), j)
 
     # Ensure "intercept" is included
-    if (!"intercept" %in% j) {
-        j <- c("intercept", j)
+    if (!"(Intercept)" %in% j) {
+        j <- c("(Intercept)", j)
     }
 
     # Ensure we have more than one variable
@@ -117,8 +117,8 @@ setMethod("[", "ftmlm", function(x, i, j) {
     j <- intersect(colnames(x@XtX), j)
 
     # Ensure "intercept" is included
-    if (!"intercept" %in% j) {
-        j <- c("intercept", j)
+    if (!"(Intercept)" %in% j) {
+        j <- c("(Intercept)", j)
     }
 
     # Ensure we have more than one variable

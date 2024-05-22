@@ -7,7 +7,7 @@
 #' @param newdata Data frame of new data for prediction. Must contain at least some of
 #'   the predictors used in the model training.
 #' @param type A character string specifying the type of prediction: either \code{"response"}
-#'   (default) for predicted probabilities, or \code{"link"} for linear predictors.
+#'   for predicted probabilities, or \code{"link"} (default) for linear predictors.
 #' @param s Ridge penalty to apply during flexible reweighting. Default is the stored optimal penalty, or 0 if missing.
 #'
 #' @details
@@ -58,7 +58,7 @@
 #' @export
 #' @include ftmglm.R ftmlm.R
 setMethod("predict", "ftmglm",
-    function(object, newdata, type = c("response", "link")) {
+    function(object, newdata, type = c("link", "response")) {
 
         # Validate type
         type <- match.arg(type)
@@ -75,7 +75,8 @@ setMethod("predict", "ftmglm",
 
         # Validation for newdata
         if (!is.data.frame(newdata)) {
-            stop("newdata must be a data frame")
+            newdata <- as.data.frame(newdata)
+            warning("newdata was coerced to a data frame")
         }
 
         # Get the intersection of variables between newdata and model
@@ -88,13 +89,13 @@ setMethod("predict", "ftmglm",
         }
 
         ## Subset newdata to the intersecting variables
-        newdata <- cbind("intercept" = 1,
+        newdata <- cbind("(Intercept)" = 1,
                          newdata[, intersecting_vars, drop = FALSE])
 
         ## Subset object to the intersecting variables
-        XtWX <- object@XtWX[c("intercept", intersecting_vars),
-                          c("intercept", intersecting_vars), drop = FALSE]
-        XtWz <- object@XtWz[c("intercept", intersecting_vars), , drop = FALSE]
+        XtWX <- object@XtWX[c("(Intercept)", intersecting_vars),
+                            c("(Intercept)", intersecting_vars), drop = FALSE]
+        XtWz <- object@XtWz[c("(Intercept)", intersecting_vars), , drop = FALSE]
 
         # Compute the design matrix
         X <- as.matrix(newdata)

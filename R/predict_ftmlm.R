@@ -16,7 +16,8 @@ setMethod("predict", "ftmlm",
 
               # Validation for newdata
               if (!is.data.frame(newdata)) {
-                  stop("newdata must be a data frame")
+                  newdata <- as.data.frame(newdata)
+                  warning("newdata was coerced to a data frame")
               }
 
               # Validation for s
@@ -34,13 +35,13 @@ setMethod("predict", "ftmlm",
               }
 
               # Subset newdata to the intersecting variables
-              newdata <- cbind("intercept" = 1,
+              newdata <- cbind("(Intercept)" = 1,
                                newdata[, intersecting_vars, drop = FALSE])
 
               # Subset object to the intersecting variables
-              XtX <- object@XtX[c("intercept", intersecting_vars),
-                                c("intercept", intersecting_vars), drop = FALSE]
-              Xty <- object@Xty[c("intercept", intersecting_vars), , drop = FALSE]
+              XtX <- object@XtX[c("(Intercept)", intersecting_vars),
+                                c("(Intercept)", intersecting_vars), drop = FALSE]
+              Xty <- object@Xty[c("(Intercept)", intersecting_vars), , drop = FALSE]
 
               # If s is provided, we add a ridge penalty and invert XtX
               if (s > 0) {
