@@ -1,0 +1,111 @@
+---
+title: "Extracting coefficients"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Extracting coefficients}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+## load packages
+library(glmnet)
+library(FTM)
+```
+
+```{r include=FALSE}
+data(mtcars)
+
+# Fitting a linear model to the mtcars dataset
+lm_model <- lm(mpg ~ cyl + hp + wt, data = mtcars)
+
+# Create FTM object using createFromLm
+ftmlm_model <- createFromLm(lm_model)
+
+# Create FTM object using createFTM
+ftmlm_model <- createFTM(lm_model) # same as using createFromLm
+
+# Fitting a glm to the mtcars dataset
+glm_model <- glm(am ~ hp + wt + cyl, data = mtcars, family = "binomial")
+
+# Create FTM object using createFromGlm
+ftmglm_model <- createFromGlm(glm_model)
+
+# Create FTM object using createFTM
+ftmglm_model <- createFTM(glm_model)
+
+# set the predictors
+predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
+
+# Fitting a glmnet to the mtcars dataset
+glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
+
+# Create FTM object using createFromGlmnet
+ftmglmnet_model <- createFromGlmnet(glmnet_model, x = predictors, y = mtcars$am)
+
+# Create FTM object using createFTM
+ftmglmnet_model <- createFTM(glmnet_model, x = predictors, y = mtcars$am)
+```
+
+# Extract beta coefficient from FTM object
+
+FTM objects allow you to view beta coefficients for all variables or for a subset of variables. The `coef` function can be used to extract coefficients from a fitted FTM object. The `select` argument can be used to extract coefficients for specific variables (accepts variable names or integers).
+
+```{r}
+# Assuming ftmglm_model, ftmlm_model or ftmglmnet_model are pre-fitted model objects (see Create FTM Object vignette)
+
+# Extract beta coefficients for all variables from a ftmlm model
+coef(ftmlm_model)
+
+# Extract beta coefficients for a reweighted model using a subset of variables from a ftmlm model
+coef(ftmlm_model, select = c("cyl", "hp"))
+
+
+
+# This works similarly for a ftmglm model
+coef(ftmglm_model)
+
+# Similarly, you can extract beta coefficients after reweighting for a subset of variables from a ftmglm model
+coef(ftmglm_model, select = c("cyl", "hp"))
+
+
+
+# This also works for FTM objects made from glmnet models
+coef(ftmglmnet_model)
+
+# Finally, you can extract beta coefficients after reweighting for a subset of variables from a ftmglmnet model
+coef(ftmglmnet_model, select = c("cyl", "hp"))
+```
+
+# Manually subset of FTM object
+
+Although a FTM object contains information about all variables, it is possible to manually `trim` a FTM model to a subset of variables.
+
+```{r}
+# Assuming ftmglm_model, ftmlm_model or ftmglmnet_model are pre-fitted model objects (see Create FTM Object vignette)
+
+# Subset a ftmlm model, so it only contains a subset of variables
+subset(ftmlm_model, subset = c("cyl", "hp"))
+
+
+
+# Similarly, you can subset a ftmglm model
+subset(ftmglm_model, subset = c("cyl", "hp"))
+
+
+
+# This also works for FTM objects made from glmnet models
+subset(ftmglmnet_model, subset = c("cyl", "hp"))
+
+
+
+# You can also subset a FTM object using this notation, although it is less recommended
+ftmlm_model[, c("cyl", "hp")]
+```

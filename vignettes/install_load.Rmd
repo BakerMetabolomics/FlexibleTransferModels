@@ -1,0 +1,36 @@
+---
+title: "Install and load FTM"
+author: "Corey Giles & Changyu Yi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Install and load FTM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Installing and loading the package
+
+The FTM package can be installed from github using code below. Note that you'll need to install [glmnet](https://glmnet.stanford.edu/articles/glmnet.html) package, if you haven't already.
+
+```r
+if (!require("devtools")) install.packages("devtools")
+if (!require("glmnet")) install.packages("glmnet")
+devtools::install_github("BakerMetabolomics/FlexibleTransferModels", build_vignettes = TRUE)
+```
+
+Load the package.
+
+```{r message=TRUE, warning=FALSE}
+library(FTM)
+```
+
+

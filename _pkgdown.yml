@@ -2,3 +2,51 @@ url: ~
 template:
   bootstrap: 5
 
+reference:
+  - title: "Create a Flexible Transfer Model"
+    desc: >
+      Learn how to create a flexible transfer model from existing models (lm, glm, glmnet)
+    contents:
+      - createFTM
+      - createFromLm
+      - createFromGlm
+      - createFromGlmnet
+  - title: "Extract coefficients from a flexible transfer model"
+    desc: >
+      Learn how to subset, reweight, and extract coefficients from a flexible transfer model
+    contents:
+      - coef,ftmglm-method
+      - subset,ftmglm-method
+      - show,ftmglm-method
+      - formula,ftmglm-method
+  - title: "Use a flexible transfer model to predict new data"
+    desc: >
+      Learn how to use a flexible transfer model to predict new data, even when there are missing variables
+    contents:
+      - predict,ftmglm-method
+  - title: "Explore the structure of a flexible transfer model"
+    desc: >
+      See constructors and classes for flexible transfer models
+    contents:
+      - ftmglm-class
+      - ftmlm-class
+      - ftmglm
+      - ftmlm
+
+articles:
+  - title: "Reason to use FTM"
+    contents:
+      - reason_to_use_FTM
+  - title: "Install and load FTM"
+    contents:
+      - install_load
+  - title: "Create FTM from lm, glm or glmnet"
+    contents:
+      - create_FTM
+  - title: "Extract coefficients from the FTM"
+    contents:
+      - extract_coefficient
+  - title: "Predicting in new datasets using FTM"
+    contents:
+      - predicting_in_newdata
+

@@ -1,0 +1,84 @@
+---
+title: "Create FTM object"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create FTM object}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+## load packages
+library(glmnet)
+library(FTM)
+```
+
+# Create FTM objects
+
+FTM object can be created from lm, glm, and glmnet models using the `createFTM` function. This is a wrapper that passes the model to specific functions e.g. `createFromLm` to create FTM object from a lm object. These functions can be called directly, but will return an error if you pass in a model that is not supported.
+
+## Create FTM object from linear model
+Here, we create a linear model (using lm), then convert it to a FTM object.
+
+```{r}
+# Load the mtcars dataset
+data(mtcars)
+
+# Fit a linear model to the mtcars dataset, predicting mpg from cyl, hp, and wt
+lm_model <- lm(mpg ~ cyl + hp + wt, data = mtcars)
+
+# Create FTM object using createFTM
+ftmlm_model <- createFTM(lm_model) # same as using createFromLm
+
+# A quick look at the model (shows a ftmlm model)
+show(ftmlm_model)
+```
+
+
+## Create FTM object from gernalized linear model
+Just like creating an FTM object from a linear model, we can create FTM objects from a generalized linear model (binomial family).
+
+```{r}
+# Create a logistic model using the mtcars dataset
+glm_model <- glm(am ~ hp + wt + cyl, data = mtcars, family = "binomial")
+
+# Create FTM object using createFTM
+ftmglm_model <- createFTM(glm_model)
+
+# A quick look at the model (shows a ftmglm model)
+show(ftmglm_model)
+```
+
+## Create FTM object from glmnet model (both linear and binomial models)
+Creating a FTM object from a glmnet model is just as easy. However, due to the way glmnet models are stored, we need to manually pass in the predictor and outcome data. It is recommended to use cv.glmnet in order to get the optimal lambda (by default, the `lambda.min` will be used).
+
+```{r}
+# glmnet requires input data to be in matrices
+predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
+
+# Fitting a cv.glmnet to the mtcars dataset
+glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial", alpha = 0)
+
+# Create FTM object using createFTM
+ftmglmnet_model <- createFTM(glmnet_model, x = predictors, y = mtcars$am)
+
+# A quick look at the model (shows a ftmglm model)
+show(ftmglmnet_model)
+
+# We can also fit a linear model using glmnet
+glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$mpg, family = "gaussian", alpha = 0)
+
+# Create FTM object using createFTM
+ftmglmnet_model <- createFTM(glmnet_model, x = predictors, y = mtcars$mpg)
+
+# A quick look at the model (shows a ftmlm model)
+show(ftmglmnet_model)
+```

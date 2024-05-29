@@ -1,0 +1,90 @@
+---
+title: "Predicting in new datasets"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Predicting in new datasets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+## load packages
+library(glmnet)
+library(FTM)
+```
+
+```{r include=FALSE}
+data(mtcars)
+
+# Fitting a linear model to the mtcars dataset
+lm_model <- lm(mpg ~ cyl + hp + wt, data = mtcars)
+
+# Create FTM object using createFromLm
+ftmlm_model <- createFromLm(lm_model)
+
+# Create FTM object using createFTM
+ftmlm_model <- createFTM(lm_model) # same as using createFromLm
+
+# Fitting a glm to the mtcars dataset
+glm_model <- glm(am ~ hp + wt + cyl, data = mtcars, family = "binomial")
+
+# Create FTM object using createFromGlm
+ftmglm_model <- createFromGlm(glm_model)
+
+# Create FTM object using createFTM
+ftmglm_model <- createFTM(glm_model)
+
+# set the predictors
+predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
+
+# Fitting a glmnet to the mtcars dataset
+glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
+
+# Create FTM object using createFromGlmnet
+ftmglmnet_model <- createFromGlmnet(glmnet_model, x = predictors, y = mtcars$am)
+
+# Create FTM object using createFTM
+ftmglmnet_model <- createFTM(glmnet_model, x = predictors, y = mtcars$am)
+```
+
+# Using FTM objects to predict outcomes in new datasets
+FTM objects allow the prediction of outcomes using the `predict` function, just like the original model.
+
+```{r}
+# Create a "new" data
+new_data <- mtcars[1:10, c("hp", "wt", "cyl")]
+
+# predict using the FTM from lm model
+predict(ftmlm_model, newdata = new_data)
+
+# predict using the FTM from glm model
+predict(ftmglm_model, newdata = new_data)
+
+# predict using the FTM from glmnet model
+predict(ftmglmnet_model, newdata = new_data)
+```
+
+# FTM objects allow predictions even with missing variables
+The major benefit of FTM objects is that they allow predictions even when the new dataset has missing variables. This is because of the flexible structure of the FTM that is achieved by reweighting of the beta coefficients.
+
+```{r}
+# Create a "new" data with missing variables (missing "cyl")
+new_data <- mtcars[1:10, c("hp", "wt")]
+
+# predict using the FTM from lm model
+predict(ftmlm_model, newdata = new_data)
+
+# predict using the FTM from glm model
+predict(ftmglm_model, newdata = new_data)
+
+# predict using the FTM from glmnet model
+predict(ftmglmnet_model, newdata = new_data)
+```
