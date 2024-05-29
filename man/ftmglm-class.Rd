@@ -19,8 +19,8 @@ regression analysis. It is not intended for direct use.
 \section{Slots}{
 
 \describe{
-  \item{XtWX}{\code{matrix} representing the weighted crossproduct of the predictor variables.}
-  \item{XtWz}{\code{matrix} representing the weighted crossproduct of the predictor variables and outcomes.}
+  \item{XtWX}{\code{matrix} representing the weighted cross product of the predictor variables.}
+  \item{XtWz}{\code{matrix} representing the weighted cross product of the predictor variables and outcomes.}
 }
 }
 

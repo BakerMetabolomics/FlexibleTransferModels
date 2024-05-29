@@ -1,3 +1,6 @@
+# Setup
+require(glmnet)
+
 # Test for correct lm object handling
 test_that("createFTM correctly handles lm objects", {
     data(mtcars)

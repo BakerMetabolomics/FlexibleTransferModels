@@ -19,8 +19,8 @@ regression analysis. It is not intended for direct use.
 \section{Slots}{
 
 \describe{
-  \item{XtX}{\code{matrix} representing the crossproduct of the predictor variables.}
-  \item{Xty}{\code{matrix} representing the crossproduct of the predictor variables and outcomes.}
+  \item{XtX}{\code{matrix} representing the cross product of the predictor variables.}
+  \item{Xty}{\code{matrix} representing the cross product of the predictor variables and outcomes.}
   \item{s}{\code{numeric} representing the optimal Ridge penalty from cross-validation (if available).}
 }
 }

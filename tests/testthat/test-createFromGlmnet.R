@@ -1,4 +1,5 @@
 # Setup
+require(glmnet)
 data(mtcars)
 # binomial model
 predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])

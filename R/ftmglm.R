@@ -11,8 +11,8 @@
 #'
 #' @section Slots:
 #' \describe{
-#'   \item{XtWX}{\code{matrix} representing the weighted crossproduct of the predictor variables.}
-#'   \item{XtWz}{\code{matrix} representing the weighted crossproduct of the predictor variables and outcomes.}
+#'   \item{XtWX}{\code{matrix} representing the weighted cross product of the predictor variables.}
+#'   \item{XtWz}{\code{matrix} representing the weighted cross product of the predictor variables and outcomes.}
 #'}
 #'
 #' @export
@@ -27,8 +27,8 @@ setClass("ftmglm",
 #' This function is typically called internally within higher-level functions that
 #' prepare data and perform model fitting.
 #'
-#' @param XtWX A numeric matrix representing the weighted crossproduct of predictors.
-#' @param XtWz A numeric matrix representing the weighted crossproduct of predictors and outcomes.
+#' @param XtWX A numeric matrix representing the weighted cross product of predictors.
+#' @param XtWz A numeric matrix representing the weighted cross product of predictors and outcomes.
 #'
 #' @return An object of class \code{\linkS4class{ftmglm}}.
 #'

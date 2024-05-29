@@ -21,6 +21,7 @@
 #' glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
 #' ftmglm_model <- createFromGlmnet(glmnet_model, x = predictors, y = mtcars$am)
 #' }
+#' @import glmnet
 #' @export
 createFromGlmnet <- function(glmnetObj, s = NULL, x = NULL, y = NULL) {
 

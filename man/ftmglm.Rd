@@ -7,9 +7,9 @@
 ftmglm(XtWX, XtWz)
 }
 \arguments{
-\item{XtWX}{A numeric matrix representing the weighted crossproduct of predictors.}
+\item{XtWX}{A numeric matrix representing the weighted cross product of predictors.}
 
-\item{XtWz}{A numeric matrix representing the weighted crossproduct of predictors and outcomes.}
+\item{XtWz}{A numeric matrix representing the weighted cross product of predictors and outcomes.}
 }
 \value{
 An object of class \code{\linkS4class{ftmglm}}.

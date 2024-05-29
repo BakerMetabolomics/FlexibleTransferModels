@@ -1,4 +1,5 @@
 # Setup
+require(glmnet)
 data(mtcars)
 predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
 glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")

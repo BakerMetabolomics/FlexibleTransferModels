@@ -34,7 +34,7 @@ traditionally be solved through 2 options:
 
 FTM overcomes this challenge by allowing the model to be evaluated in
 datasets without exact overlap in the predictor variables, without loss
-in generalizability, re-optimization, or access to individual-level
+in generalisability, re-optimization, or access to individual-level
 data. This is achieved by storing intermediate matrices that allow beta
 coefficients to be recalculated using a subset of original predictors.
 

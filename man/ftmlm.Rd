@@ -7,9 +7,9 @@
 ftmlm(XtX, Xty, s = NULL)
 }
 \arguments{
-\item{XtX}{A numeric matrix representing the crossproduct of predictors.}
+\item{XtX}{A numeric matrix representing the cross product of predictors.}
 
-\item{Xty}{A numeric matrix representing the crossproduct of predictors and outcomes.}
+\item{Xty}{A numeric matrix representing the cross product of predictors and outcomes.}
 
 \item{s}{A numeric value representing the optimal Ridge penalty from cross-validation (if available).}
 }

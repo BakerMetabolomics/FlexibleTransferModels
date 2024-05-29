@@ -11,8 +11,8 @@
 #'
 #' @section Slots:
 #' \describe{
-#'   \item{XtX}{\code{matrix} representing the crossproduct of the predictor variables.}
-#'   \item{Xty}{\code{matrix} representing the crossproduct of the predictor variables and outcomes.}
+#'   \item{XtX}{\code{matrix} representing the cross product of the predictor variables.}
+#'   \item{Xty}{\code{matrix} representing the cross product of the predictor variables and outcomes.}
 #'   \item{s}{\code{numeric} representing the optimal Ridge penalty from cross-validation (if available).}
 #'}
 #'
@@ -28,8 +28,8 @@ setClass("ftmlm",
 #' This function is typically called internally within higher-level functions that
 #' prepare data and perform model fitting.
 #'
-#' @param XtX A numeric matrix representing the crossproduct of predictors.
-#' @param Xty A numeric matrix representing the crossproduct of predictors and outcomes.
+#' @param XtX A numeric matrix representing the cross product of predictors.
+#' @param Xty A numeric matrix representing the cross product of predictors and outcomes.
 #' @param s A numeric value representing the optimal Ridge penalty from cross-validation (if available).
 #'
 #' @return An object of class \code{\linkS4class{ftmlm}}.

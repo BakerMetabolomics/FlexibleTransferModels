@@ -43,7 +43,7 @@ show(ftmlm_model)
 ```
 
 
-## Create FTM object from gernalized linear model
+## Create FTM object from a generalized linear model
 Just like creating an FTM object from a linear model, we can create FTM objects from a generalized linear model (binomial family).
 
 ```{r}

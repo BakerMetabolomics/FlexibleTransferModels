@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 # Installing and loading the package
 
-The FTM package can be installed from github using code below. Note that you'll need to install [glmnet](https://glmnet.stanford.edu/articles/glmnet.html) package, if you haven't already.
+The FTM package can be installed from Github using code below. Note that you'll need to install [glmnet](https://glmnet.stanford.edu/articles/glmnet.html) package, if you haven't already.
 
 ```r
 if (!require("devtools")) install.packages("devtools")

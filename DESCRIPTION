@@ -14,16 +14,18 @@ Maintainer: Corey Giles <Corey.Giles@Baker.edu.au>
 Description: Provides a flexible framework for the transfer of 'omics prediction models.
     This package enables users to adapt glm, lm, and glmnet models to the Flexible Transfer
     Models (FTM) framework. This allows models to be evaluated in datasets without exact
-    overlap in the predictor variables, without loss in generalizability, re-optimization or 
+    overlap in the predictor variables, without loss in generalisability, re-optimization or 
     access to individual-level data.
     It leverages an innovative matrix-based approach to re-estimate model parameters (beta 
     coefficients) using both full and reduced sets of predictor variables, enhancing the 
-    transferrability of prediction models across different datasets.
+    transferability of prediction models across different datasets.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
-Imports: methods
+Imports:
+    methods,
+    glmnet
 Collate: 
     'ftmlm.R'
     'ftmglm.R'
@@ -45,3 +47,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://bakermetabolomics.github.io/FlexibleTransferModels/
+Language: en-AU

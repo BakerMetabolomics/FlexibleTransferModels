@@ -103,9 +103,4 @@ subset(ftmglm_model, subset = c("cyl", "hp"))
 
 # This also works for FTM objects made from glmnet models
 subset(ftmglmnet_model, subset = c("cyl", "hp"))
-
-
-
-# You can also subset a FTM object using this notation, although it is less recommended
-ftmlm_model[, c("cyl", "hp")]
 ```

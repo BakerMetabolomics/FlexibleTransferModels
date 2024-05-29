@@ -3,26 +3,16 @@
 \name{subset,ftmglm-method}
 \alias{subset,ftmglm-method}
 \alias{subset,ftmlm-method}
-\alias{[,ftmglm-method}
-\alias{[,ftmlm-method}
 \title{Extract/Subset the variables used in a ftmglm or ftmlm object}
 \usage{
 \S4method{subset}{ftmglm}(x, subset)
 
 \S4method{subset}{ftmlm}(x, subset)
-
-\S4method{[}{ftmglm}(x, i, j)
-
-\S4method{[}{ftmlm}(x, i, j)
 }
 \arguments{
 \item{x}{Object of class inheriting from \code{ftmglm} or \code{ftmlm}.}
 
 \item{subset}{A character string of variables or indices to use.}
-
-\item{i}{Ignored.}
-
-\item{j}{A character string of variables or indices to use.}
 }
 \value{
 A \code{ftmglm} or \code{ftmlm} object that only uses the specified variables.
@@ -30,7 +20,4 @@ A \code{ftmglm} or \code{ftmlm} object that only uses the specified variables.
 \description{
 Allows the subsetting of \code{ftmglm} or \code{ftmlm} objects in order to restrict the
 model to use only the specified variables.
-}
-\note{
-\code{i} is not used and will be ignored.
 }
