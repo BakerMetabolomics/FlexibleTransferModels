@@ -4,10 +4,12 @@ Title: Flexible Transfer Models
 Version: 0.1.0
 Author: Corey Giles [aut, cre],
   Changyu Yi [aut]
-Author@R: c(person("Corey", "Giles", role = c("aut", "cre"),
-                     email = "Corey.Giles@Baker.edu.au"),
-              person("Changyu", "Yi", role = "aut",
-                     email = "Joe.Yi@Baker.edu.au"))
+Authors@R: c(person("Corey", "Giles", role = c("aut", "cre"),
+                    email = "Corey.Giles@Baker.edu.au",
+                    comment = c(ORCID = "0000-0002-6050-1259")),
+             person("Changyu", "Yi", role = "aut",
+                    email = "Joe.Yi@Baker.edu.au",
+                    comment = c(ORCID = "0000-0003-3839-2292")))
 Maintainer: Corey Giles <Corey.Giles@Baker.edu.au>
 Description: Provides a flexible framework for the transfer of 'omics prediction models.
     This package enables users to adapt glm, lm, and glmnet models to the Flexible Transfer

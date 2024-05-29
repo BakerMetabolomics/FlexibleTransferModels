@@ -2,6 +2,19 @@ url: ~
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:
+      [reference, articles]
+    right:
+      [search, webportal]
+  components:
+    webportal:
+      href: https://metabolomics.baker.edu.au/
+      icon: fa fa-external-link
+      text: Baker Metabolomics WebPortal
+      aria-label: Baker Metabolomics WebPortal
+
 reference:
   - title: "Create a Flexible Transfer Model"
     desc: >
@@ -49,4 +62,3 @@ articles:
   - title: "Predicting in new datasets using FTM"
     contents:
       - predicting_in_newdata
-

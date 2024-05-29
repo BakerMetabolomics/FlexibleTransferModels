@@ -49,7 +49,7 @@ if (!require("glmnet")) install.packages("glmnet")
 devtools::install_github("BakerMetabolomics/FlexibleTransferModels", build_vignettes = TRUE)
 ```
 
-Load the packages, you’ll need to have
+Load the package. You’ll need to have
 [glmnet](https://glmnet.stanford.edu/articles/glmnet.html) installed to
 use the FTM package.
 
