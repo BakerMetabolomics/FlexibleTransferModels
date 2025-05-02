@@ -84,17 +84,11 @@ show(ftmglmnet_model)
 #> Coefficients:
 #> (Intercept)           hp           wt          cyl  
 #>      6.2245       0.0116      -2.0526      -0.3230
-```
-
-``` r
 
 # Extract the beta coefficients from a FTM object
 coef(ftmglmnet_model)
 #> (Intercept)          hp          wt         cyl 
 #>  6.22451499  0.01164029 -2.05263254 -0.32296485
-```
-
-``` r
 
 
 # 3. Predict on "new" data
@@ -114,9 +108,6 @@ predictions
 #> Merc 240D         0.2903789
 #> Merc 230          0.3947689
 #> Merc 280          0.2070870
-```
-
-``` r
 
 # 4. Predict on "new" data that has missing predictors
 new_data_missing <- mtcars[1:10, c("hp", "wt")] # missing cyl
@@ -152,3 +143,15 @@ Contributions to the FTM package are welcome from the community. Bug
 reports, documentation enhancements, and feature requests can be filed
 on the [GitHub issues
 page](https://github.com/BakerMetabolomics/FlexibleTransferModels/issues).
+
+## Contact
+
+For any inquiries, please contact:
+
+- Corey Giles: <Corey.Giles@Baker.edu.au>
+- Changyu Yi: <Joe.Yi@Baker.edu.au>
+
+## Version History
+
+For a detailed list of changes, improvements, and bug fixes, please
+refer to the [NEWS.md](NEWS.md) file.

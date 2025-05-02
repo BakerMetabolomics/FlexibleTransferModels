@@ -95,4 +95,15 @@ browseVignettes("FTM")
 
 Contributions to the FTM package are welcome from the community. Bug reports, documentation enhancements, and feature requests can be filed on the [GitHub issues page](https://github.com/BakerMetabolomics/FlexibleTransferModels/issues).
 
+## Contact
+
+For any inquiries, please contact:
+
+- Corey Giles: Corey.Giles@Baker.edu.au
+- Changyu Yi: Joe.Yi@Baker.edu.au
+
+## Version History
+
+For a detailed list of changes, improvements, and bug fixes, please refer to the [NEWS.md](NEWS.md) file.
+
 
