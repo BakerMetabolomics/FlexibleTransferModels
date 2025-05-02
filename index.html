@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">FTM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,15 +103,13 @@ FTM - Flexible Transfer Models
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
 <span><span class="co">#&gt; (Intercept)           hp           wt          cyl  </span></span>
-<span><span class="co">#&gt;      6.2245       0.0116      -2.0526      -0.3230</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt;      6.2245       0.0116      -2.0526      -0.3230</span></span>
+<span></span>
 <span><span class="co"># Extract the beta coefficients from a FTM object</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">ftmglmnet_model</span><span class="op">)</span></span>
 <span><span class="co">#&gt; (Intercept)          hp          wt         cyl </span></span>
-<span><span class="co">#&gt;  6.22451499  0.01164029 -2.05263254 -0.32296485</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt;  6.22451499  0.01164029 -2.05263254 -0.32296485</span></span>
+<span></span>
 <span></span>
 <span><span class="co"># 3. Predict on "new" data</span></span>
 <span><span class="va">new_data</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hp"</span>, <span class="st">"wt"</span>, <span class="st">"cyl"</span><span class="op">)</span><span class="op">]</span></span>
@@ -129,9 +127,8 @@ FTM - Flexible Transfer Models
 <span><span class="co">#&gt; Duster 360        0.3025400</span></span>
 <span><span class="co">#&gt; Merc 240D         0.2903789</span></span>
 <span><span class="co">#&gt; Merc 230          0.3947689</span></span>
-<span><span class="co">#&gt; Merc 280          0.2070870</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; Merc 280          0.2070870</span></span>
+<span></span>
 <span><span class="co"># 4. Predict on "new" data that has missing predictors</span></span>
 <span><span class="va">new_data_missing</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hp"</span>, <span class="st">"wt"</span><span class="op">)</span><span class="op">]</span> <span class="co"># missing cyl</span></span>
 <span></span>
@@ -154,13 +151,29 @@ FTM - Flexible Transfer Models
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
 <p>For more detailed information and advanced usage, please refer to the package vignettes available within R:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"FTM"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h2>
 <p>Contributions to the FTM package are welcome from the community. Bug reports, documentation enhancements, and feature requests can be filed on the <a href="https://github.com/BakerMetabolomics/FlexibleTransferModels/issues" class="external-link">GitHub issues page</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
+</h2>
+<p>For any inquiries, please contact:</p>
+<ul>
+<li>Corey Giles: <a href="mailto:Corey.Giles@Baker.edu.au" class="email">Corey.Giles@Baker.edu.au</a>
+</li>
+<li>Changyu Yi: <a href="mailto:Joe.Yi@Baker.edu.au" class="email">Joe.Yi@Baker.edu.au</a>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="version-history">Version History<a class="anchor" aria-label="anchor" href="#version-history"></a>
+</h2>
+<p>For a detailed list of changes, improvements, and bug fixes, please refer to the <a href="NEWS.html">NEWS.md</a> file.</p>
 </div>
 </div>
 
