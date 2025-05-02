@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   create_FTM: create_FTM.html
@@ -7,8 +7,7 @@ articles:
   install_load: install_load.html
   predicting_in_newdata: predicting_in_newdata.html
   reason_to_use_FTM: reason_to_use_FTM.html
-last_built: 2024-05-29T03:33Z
+last_built: 2025-05-02T10:58Z
 urls:
   reference: https://bakermetabolomics.github.io/FlexibleTransferModels/reference
   article: https://bakermetabolomics.github.io/FlexibleTransferModels/articles
-

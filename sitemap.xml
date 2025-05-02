@@ -1,72 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/404.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/create_FTM.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/extract_coefficient.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/install_load.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/predicting_in_newdata.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/reason_to_use_FTM.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/coef-ftmglm-method.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFTM.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFromGlm.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFromGlmnet.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFromLm.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/formula-ftmglm-method.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmglm-class.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmglm.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmlm-class.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmlm.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/predict-ftmglm-method.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/show-ftmglm-method.html</loc>
-  </url>
-  <url>
-    <loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/subset-ftmglm-method.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/404.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/create_FTM.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/extract_coefficient.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/index.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/install_load.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/predicting_in_newdata.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/reason_to_use_FTM.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/authors.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/index.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/coef-ftmglm-method.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFTM.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFromGlm.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFromGlmnet.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/createFromLm.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/formula-ftmglm-method.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmglm-class.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmglm.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmlm-class.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmlm.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/index.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/predict-ftmglm-method.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/show-ftmglm-method.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/subset-ftmglm-method.html</loc></url>
 </urlset>
+
