@@ -1,7 +1,7 @@
 Package: FTM
 Type: Package
 Title: Flexible Transfer Models
-Version: 0.1.0
+Version: 0.1.1
 Author: Corey Giles [aut, cre],
   Changyu Yi [aut]
 Authors@R: c(person("Corey", "Giles", role = c("aut", "cre"),
@@ -22,7 +22,7 @@ Description: Provides a flexible framework for the transfer of 'omics prediction
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Imports:
     methods,
     glmnet

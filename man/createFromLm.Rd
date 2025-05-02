@@ -4,10 +4,12 @@
 \alias{createFromLm}
 \title{Create a Flexible Transfer Model (ftmlm) from a lm object}
 \usage{
-createFromLm(lmObj)
+createFromLm(lmObj, outcome_name = NULL)
 }
 \arguments{
 \item{lmObj}{a lm object from the stats package}
+
+\item{outcome_name}{Optional name of the outcome variable; if not provided, it will be extracted from the model object.}
 }
 \value{
 A ftmlm object.
