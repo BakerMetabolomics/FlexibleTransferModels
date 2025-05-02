@@ -4,6 +4,7 @@
 #' It extracts the necessary components and adapts them into the FTM framework.
 #'
 #' @param lmObj a lm object from the stats package
+#' @param outcome_name Optional name of the outcome variable; if not provided, it will be extracted from the model object.
 #'
 #' @return A ftmlm object.
 #'
@@ -16,7 +17,7 @@
 #' }
 #' @export
 #' @importFrom stats formula model.matrix
-createFromLm <- function(lmObj) {
+createFromLm <- function(lmObj, outcome_name = NULL) {
 
     # Validation for lmObj
     if (!inherits(lmObj, "lm")) {
@@ -38,8 +39,10 @@ createFromLm <- function(lmObj) {
     Xty <- t(X) %*% y
     XtX <- t(X) %*% X
 
-    # Get the outcome name
-    outcome_name <- all.vars(formula(lmObj))[1]
+    # Get the outcome name (if not provided)
+    if (is.null(outcome_name)) {
+        outcome_name <- all.vars(formula(lmObj))[1]
+    }
 
     # Update the outcome name
     colnames(Xty) <- outcome_name

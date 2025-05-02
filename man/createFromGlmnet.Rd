@@ -4,7 +4,7 @@
 \alias{createFromGlmnet}
 \title{Create a Flexible Transfer Model (ftmglm or ftmlm) from a glmnet object}
 \usage{
-createFromGlmnet(glmnetObj, s = NULL, x = NULL, y = NULL)
+createFromGlmnet(glmnetObj, s = NULL, x = NULL, y = NULL, outcome_name = NULL)
 }
 \arguments{
 \item{glmnetObj}{a cv.glmnet or glmnet object from the glmnet package}
@@ -14,6 +14,8 @@ createFromGlmnet(glmnetObj, s = NULL, x = NULL, y = NULL)
 \item{x}{matrix of predictors used in the glmnet model}
 
 \item{y}{vector of outcomes used in the glmnet model}
+
+\item{outcome_name}{Optional name of the outcome variable; if not provided, it will be extracted from the model object.}
 }
 \value{
 A ftmglm or ftmlm object.
@@ -31,7 +33,7 @@ The data used in the glmnet model must be available in the global environment.
 # Fitting a glmnet model to the mtcars dataset
 data(mtcars)
 predictors <- as.matrix(mtcars[, c("hp", "wt", "cyl")])
-glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial")
+glmnet_model <- glmnet::cv.glmnet(predictors, mtcars$am, family = "binomial", alpha = 0)
 ftmglm_model <- createFromGlmnet(glmnet_model, x = predictors, y = mtcars$am)
 }
 }
