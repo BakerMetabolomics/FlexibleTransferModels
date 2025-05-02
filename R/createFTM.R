@@ -28,13 +28,13 @@ createFTM <- function(modelObj, s = NULL, x = NULL, y = NULL, outcome_name = NUL
 
     # Determine if the model is a logistic model from glm
     if (inherits(modelObj, "glm")) {
-        return(createFromGlm(modelObj = modelObj,
+        return(createFromGlm(glmObj = modelObj,
                              outcome_name = outcome_name))
     }
 
     # Determine if the model is a linear model from lm
     if (inherits(modelObj, "lm")) {
-        return(createFromLm(modelObj = modelObj,
+        return(createFromLm(lmObj = modelObj,
                             outcome_name = outcome_name))
     }
 
@@ -44,7 +44,7 @@ createFTM <- function(modelObj, s = NULL, x = NULL, y = NULL, outcome_name = NUL
     }
 
     # Create an FTM object from glmnet model
-    return(createFromGlmnet(modelObj = modelObj,
+    return(createFromGlmnet(glmnetObj = modelObj,
                             s = s,
                             x = x,
                             y = y,
