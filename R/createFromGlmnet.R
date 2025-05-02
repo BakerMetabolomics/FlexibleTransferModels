@@ -131,7 +131,7 @@ createFromGlmnet <- function(glmnetObj, s = NULL, x = NULL, y = NULL, outcome_na
 
     } else {
         # Warn user that the model is not binomial or linear
-        stop(sprintf("glmnetObj must be a binomial or linear (gaussian) model. Provided model is a: %s", class(glmnetObj$glmnet.fit)[1]))
+        stop(sprintf("glmnetObj must be a binomial or linear (gaussian) model. Provided model is a: %s", class(glmnetObj)[1]))
     }
 
 }
