@@ -4,6 +4,7 @@
 #' It extracts the necessary components and adapts them into the FTM framework.
 #'
 #' @param glmObj a glm object from the stats package
+#' @param outcome_name Optional name of the outcome variable; if not provided, it will be extracted from the model object.
 #'
 #' @return A ftmglm object.
 #'
@@ -16,7 +17,7 @@
 #' }
 #' @export
 #' @importFrom stats formula model.matrix
-createFromGlm <- function(glmObj) {
+createFromGlm <- function(glmObj, outcome_name = NULL) {
 
     # Validation for glmObj
     if (!inherits(glmObj, "glm")) {
@@ -39,8 +40,10 @@ createFromGlm <- function(glmObj) {
     XtWz <- t(X) %*% diag(as.vector(w)) %*% z
     XtWX <- t(X) %*% diag(as.vector(w)) %*% X
 
-    # Get the outcome name
-    outcome_name <- all.vars(formula(glmObj))[1]
+    # Get the outcome name (if not provided)
+    if (is.null(outcome_name)) {
+        outcome_name <- all.vars(formula(glmObj))[1]
+    }
 
     # Update the outcome name
     colnames(XtWz) <- outcome_name
