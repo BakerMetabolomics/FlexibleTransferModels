@@ -55,7 +55,7 @@ createFromGlmnet <- function(glmnetObj, s = NULL, x = NULL, y = NULL, outcome_na
     # Get the outcome variable name
     if (is.null(outcome_name)) {
         # Extract the outcome name from the column names of the response variable, or from the glmnet object
-        if (is.data.frame((y) || is.matrix(y))) {
+        if (is.data.frame(y) || is.matrix(y)) {
             outcome_name <- colnames(y)
         } else if (inherits(glmnetObj, "cv.glmnet")) {
             outcome_name <- get_outcome_name(glmnetObj$glmnet.fit)
