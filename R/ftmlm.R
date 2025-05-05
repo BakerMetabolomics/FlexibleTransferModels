@@ -53,7 +53,7 @@ setClass("ftmlm",
 #'   model <- ftmlm(XtX, Xty)
 #' }
 #' @export
-ftmlm <- function(XtX, Xty, s = NULL, n = NA, yty = NA, y_mean = NA) {
+ftmlm <- function(XtX, Xty, s = NULL, n = NA_real_, yty = NA_real_, y_mean = NA_real_) {
     validate_input_input(XtX, Xty, s, n, yty, y_mean)
     new("ftmlm", XtX = XtX, Xty = Xty, s = s, n = n, yty = yty, y_mean = y_mean)
 }

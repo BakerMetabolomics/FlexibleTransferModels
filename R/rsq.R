@@ -65,6 +65,7 @@ setGeneric("rsq",
 #' @seealso \code{\link{predict,ftmglm-method}} and \code{\link{predict,ftmlm-method}} for methods to make
 #' predictions using model objects.
 #' @export
+#' @importFrom methods slotNames
 #' @include ftmglm.R ftmlm.R
 setMethod("rsq", "ftmglm",
     function(object, select = NULL) {
@@ -123,7 +124,7 @@ setMethod("rsq", "ftmlm",
         # Calculate the total sum of squares (TSS)
         TSS <- yty - n * y_mean^2
         # Calculate the sum of squares due to regression (SSR)
-        SSR <- crossprod(beta, Xty) - n * y_mean^2
+        SSR <- as.numeric(crossprod(beta, Xty)) - n * y_mean^2
 
         # Calculate R-squared
         R_squared <- SSR / TSS

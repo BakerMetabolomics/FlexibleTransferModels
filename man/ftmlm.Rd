@@ -4,7 +4,7 @@
 \alias{ftmlm}
 \title{Constructor for ftmlm Objects}
 \usage{
-ftmlm(XtX, Xty, s = NULL, n = NA, yty = NA, y_mean = NA)
+ftmlm(XtX, Xty, s = NULL, n = NA_real_, yty = NA_real_, y_mean = NA_real_)
 }
 \arguments{
 \item{XtX}{A numeric matrix representing the cross product of predictors.}
