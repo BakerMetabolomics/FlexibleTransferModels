@@ -92,13 +92,15 @@ setMethod("show", "ftmlm", function(object) {
 
         # Add ellipsis
         coefficients <- c(coefficients, "..." = NA)
-
-        cat("Coefficients:\n", head(coef(object), 10))
     }
 
     # Display coefficients if calculated and stored
     cat("Coefficients:\n")
     print.default(format(coefficients, digits = 3L), print.gap = 2L, quote = FALSE)
+    cat("\n")
+
+    # Display the prediction R-squared
+    cat(sprintf("  R-squared: %f\n", rsq(object)))
 
     # Finish with a newline
     cat("\n")

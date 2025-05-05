@@ -37,6 +37,7 @@ Collate:
     'formula.R'
     'predict_ftmglm.R'
     'predict_ftmlm.R'
+    'rsq.R'
     'show.R'
     'subsetting.R'
     'utils.R'

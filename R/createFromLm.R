@@ -39,6 +39,13 @@ createFromLm <- function(lmObj, outcome_name = NULL) {
     Xty <- t(X) %*% y
     XtX <- t(X) %*% X
 
+    # Calculate the sample size
+    n <- nrow(X)
+    # Calculate the mean of the outcome variable
+    y_mean <- mean(y, na.rm = TRUE)
+    # Calculate the sum of squared responses
+    yty <- as.numeric(crossprod(y))
+
     # Get the outcome name (if not provided)
     if (is.null(outcome_name)) {
         outcome_name <- all.vars(formula(lmObj))[1]
@@ -48,5 +55,5 @@ createFromLm <- function(lmObj, outcome_name = NULL) {
     colnames(Xty) <- outcome_name
 
     # Create ftmlm object
-    ftmlm(XtX = XtX, Xty = Xty)
+    ftmlm(XtX = XtX, Xty = Xty, n = n, yty = yty, y_mean = y_mean)
 }

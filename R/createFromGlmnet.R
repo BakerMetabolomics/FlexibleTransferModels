@@ -102,11 +102,18 @@ createFromGlmnet <- function(glmnetObj, s = NULL, x = NULL, y = NULL, outcome_na
         Xty <- t(X) %*% y
         XtX <- t(X) %*% X
 
+        # Calculate the sample size
+        n <- nrow(X)
+        # Calculate the mean of the outcome variable
+        y_mean <- mean(y, na.rm = TRUE)
+        # Calculate the sum of squared responses
+        yty <- as.numeric(crossprod(y))
+
         # Update the outcome name
         colnames(Xty) <- outcome_name
 
         # Create ftmlm object
-        return(ftmlm(XtX = XtX, Xty = Xty, s = s))
+        return(ftmlm(XtX = XtX, Xty = Xty, s = s, n = n, yty = yty, y_mean = y_mean))
 
     } else if (class(glmnetObj)[1] == "lognet") {
 

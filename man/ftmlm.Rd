@@ -4,7 +4,7 @@
 \alias{ftmlm}
 \title{Constructor for ftmlm Objects}
 \usage{
-ftmlm(XtX, Xty, s = NULL)
+ftmlm(XtX, Xty, s = NULL, n = NA, yty = NA, y_mean = NA)
 }
 \arguments{
 \item{XtX}{A numeric matrix representing the cross product of predictors.}
@@ -12,6 +12,12 @@ ftmlm(XtX, Xty, s = NULL)
 \item{Xty}{A numeric matrix representing the cross product of predictors and outcomes.}
 
 \item{s}{A numeric value representing the optimal Ridge penalty from cross-validation (if available).}
+
+\item{n}{A numeric value representing the number of observations.}
+
+\item{yty}{A numeric value representing the sum of squared responses.}
+
+\item{y_mean}{A numeric value representing the mean of the outcome variable.}
 }
 \value{
 An object of class \code{\linkS4class{ftmlm}}.
