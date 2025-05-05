@@ -5,15 +5,17 @@
 \alias{rsq,ftmlm-method}
 \title{Extract R-squared from a ftmglm or ftmlm object}
 \usage{
-\S4method{rsq}{ftmglm}(object, select = NULL)
+\S4method{rsq}{ftmglm}(object, select = NULL, s = NULL)
 
-\S4method{rsq}{ftmlm}(object, select = NULL)
+\S4method{rsq}{ftmlm}(object, select = NULL, s = NULL)
 }
 \arguments{
 \item{object}{An object of class ftmglm or ftmlm.}
 
 \item{select}{(optional) A character string of variables or indices to use. If omitted,
 all variables are used to compute R-squared.}
+
+\item{s}{(optional) Ridge penalty to apply during reweighting. Default is 0, indicating no penalty.}
 }
 \value{
 A numeric value representing the R-squared (for ftmlm) or pseudo-R-squared 
@@ -31,18 +33,25 @@ R-squared.
 
 For linear models (ftmlm objects), R-squared is calculated using:
 \deqn{TSS = yty - n \times y\_mean^2}
-\deqn{SSR = B^T X^T y - n \times y\_mean^2}
-\deqn{R^2 = \frac{SSR}{TSS}}
+\deqn{RSS = yty - 2 \times \beta^T \times Xty + \beta^T \times XtX \times \beta}
+\deqn{R^2 = 1 - \frac{RSS}{TSS}}
 
 Where:
 \itemize{
   \item TSS = Total Sum of Squares
-  \item SSR = Sum of Squares due to Regression
+  \item RSS = Residual Sum of Squares
   \item yty = Sum of squared outcome values
   \item n = Number of observations
   \item y_mean = Mean of the outcome variable
   \item B = Model coefficients
 }
+
+When \code{s} is specified, a ridge penalty is applied while calculating R-squared.
+The estimate of R-squared is no longer exact under this condition, but it still provides
+a useful measure of model fit.
+}
+\note{
+The use of a ridge penalty is not applicable to \code{ftmglm} models and will be ignored if specified.
 }
 \examples{
 \dontrun{

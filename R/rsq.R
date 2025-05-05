@@ -22,6 +22,7 @@ setGeneric("rsq",
 #' @param object An object of class ftmglm or ftmlm.
 #' @param select (optional) A character string of variables or indices to use. If omitted,
 #' all variables are used to compute R-squared.
+#' @param s (optional) Ridge penalty to apply during reweighting. Default is 0, indicating no penalty.
 #' 
 #' @details
 #' When \code{select} is specified, only the selected variables are used to calculate 
@@ -29,18 +30,22 @@ setGeneric("rsq",
 #' 
 #' For linear models (ftmlm objects), R-squared is calculated using:
 #' \deqn{TSS = yty - n \times y\_mean^2}
-#' \deqn{SSR = B^T X^T y - n \times y\_mean^2}
-#' \deqn{R^2 = \frac{SSR}{TSS}}
+#' \deqn{RSS = yty - 2 \times \beta^T \times Xty + \beta^T \times XtX \times \beta}
+#' \deqn{R^2 = 1 - \frac{RSS}{TSS}}
 #' 
 #' Where:
 #' \itemize{
 #'   \item TSS = Total Sum of Squares
-#'   \item SSR = Sum of Squares due to Regression
+#'   \item RSS = Residual Sum of Squares
 #'   \item yty = Sum of squared outcome values
 #'   \item n = Number of observations
 #'   \item y_mean = Mean of the outcome variable
 #'   \item B = Model coefficients
 #' }
+#' 
+#' When \code{s} is specified, a ridge penalty is applied while calculating R-squared.
+#' The estimate of R-squared is no longer exact under this condition, but it still provides
+#' a useful measure of model fit.
 #' 
 #' @return A numeric value representing the R-squared (for ftmlm) or pseudo-R-squared 
 #' (for ftmglm) of the model. Values range from 0 to 1, with higher values indicating 
@@ -64,11 +69,12 @@ setGeneric("rsq",
 #'
 #' @seealso \code{\link{predict,ftmglm-method}} and \code{\link{predict,ftmlm-method}} for methods to make
 #' predictions using model objects.
+#' @note The use of a ridge penalty is not applicable to \code{ftmglm} models and will be ignored if specified.
 #' @export
 #' @importFrom methods slotNames
 #' @include ftmglm.R ftmlm.R
 setMethod("rsq", "ftmglm",
-    function(object, select = NULL) {
+    function(object, select = NULL, s = NULL) {
     }
 )
 
@@ -77,10 +83,20 @@ setMethod("rsq", "ftmglm",
 #' @rdname rsq-ftmglm-method
 #' @export
 setMethod("rsq", "ftmlm",
-    function(object, select = NULL) {
+    function(object, select = NULL, s = NULL) {
+
+        # Extract s from the object if not provided
+        if (is.null(s)) {
+            s <- ifelse(is.null(object@s), 0, object@s)
+        }
+
+        # Validation for s
+        if (!is.numeric(s) || s < 0) {
+            stop("s must be numeric and positive")
+        }
 
         # Check if the object contains the necessary slots
-        if (!all(c("XtX", "Xty", "yty", "n", "y_mean") %in% slotNames(object))) {
+        if (!all(c("yty", "n", "y_mean") %in% slotNames(object))) {
             message("The object does not contain the necessary slots for R-squared calculation.")
             return(NA)
         }
@@ -104,14 +120,30 @@ setMethod("rsq", "ftmlm",
         XtX <- object@XtX[select, select, drop = FALSE]
         Xty <- object@Xty[select, , drop = FALSE]
 
-        # Perform SVD on the XtX matrix
-        XtX_SVD <- svd(XtX)
+        # If s is provided, we add a ridge penalty and invert XtX
+        if (s > 0) {
 
-        # Get the inverse of the eigen values that are greater than 1e-16
-        eigenvalues <- 1 / XtX_SVD$d[XtX_SVD$d > 1e-16]
+            # Get the schur complement of the XtX matrix
+            XtX_comp <- schur_complement(XtX)
 
-        # Calculate the truncated SVD inverse
-        XtX_inv <- XtX_SVD$u[, seq(length(eigenvalues))] %*% diag(eigenvalues) %*% t(XtX_SVD$v[, seq(length(eigenvalues))])
+            # Get the diagonal to use for the ridge penalty
+            ridge_diag <- c(0, s * diag(XtX_comp))
+
+            # Calculate the inverse of XtX + lambda * I, accounting for the scale of variables
+            XtX_inv <- solve(XtX + diag(ridge_diag, nrow = nrow(XtX), ncol = ncol(XtX)))
+
+        } else {
+
+            # Perform SVD on the XtX matrix
+            XtX_SVD <- svd(XtX)
+
+            # Get the inverse of the eigen values that are greater than 1e-16
+            eigenvalues <- 1 / XtX_SVD$d[XtX_SVD$d > 1e-16]
+
+            # Calculate the truncated SVD inverse
+            XtX_inv <- XtX_SVD$u[, seq(length(eigenvalues))] %*% diag(eigenvalues) %*% t(XtX_SVD$v[, seq(length(eigenvalues))])
+
+        }
 
         # Estimate the beta coefficients
         beta <- c(XtX_inv %*% Xty)
@@ -124,10 +156,13 @@ setMethod("rsq", "ftmlm",
         # Calculate the total sum of squares (TSS)
         TSS <- yty - n * y_mean^2
         # Calculate the sum of squares due to regression (SSR)
-        SSR <- as.numeric(crossprod(beta, Xty)) - n * y_mean^2
+        # SSR <- as.numeric(crossprod(beta, Xty)) - n * y_mean^2
+        # Calculate the residual sum of squares (RSS)
+        RSS <- as.numeric(yty - 2 * crossprod(beta, Xty) + crossprod(beta, XtX %*% beta))
 
         # Calculate R-squared
-        R_squared <- SSR / TSS
+        # R_squared <- SSR / TSS
+        R_squared <- 1 - (RSS / TSS)
 
         # Return the R-squared value
         return(R_squared)
