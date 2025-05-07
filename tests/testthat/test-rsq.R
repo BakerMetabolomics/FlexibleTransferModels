@@ -59,8 +59,7 @@ test_that("rsq handles ftmlm objects with missing slots", {
                          yty = 100,
                          y_mean = 5)
     
-    # Should return NA with a message
-    expect_message(result <- rsq(partial_ftmlm), 
-                   "The object contains NAs in the yty, n, or y_mean slots.")
-    expect_true(is.na(result))
+    # Should 
+    expect_error(result <- rsq(partial_ftmlm), 
+                 "The object contains NAs in the yty, n, or y_mean slots.")
 })

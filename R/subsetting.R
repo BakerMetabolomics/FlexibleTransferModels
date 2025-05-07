@@ -55,7 +55,7 @@ setMethod("subset", "ftmlm", function(x, subset) {
     }
 
     # Get the intersection of the variables in the model and the subset
-    subset <- intersect(colnames(x@XtWX), subset)
+    subset <- intersect(colnames(x@XtX), subset)
 
     # Ensure we have more than one variable
     if (length(subset) < 2) {
