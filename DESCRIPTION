@@ -1,7 +1,7 @@
 Package: FTM
 Type: Package
 Title: Flexible Transfer Models
-Version: 0.1.1
+Version: 0.1.2
 Author: Corey Giles [aut, cre],
   Changyu Yi [aut]
 Authors@R: c(person("Corey", "Giles", role = c("aut", "cre"),
