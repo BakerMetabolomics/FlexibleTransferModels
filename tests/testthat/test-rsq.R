@@ -63,3 +63,10 @@ test_that("rsq handles ftmlm objects with missing slots", {
     expect_error(result <- rsq(partial_ftmlm), 
                  "The object contains NAs in the yty, n, or y_mean slots.")
 })
+
+# Test that passing in more variables than available in the model works
+test_that("R-squared calculation with more variables than available in the model works", {
+    expect_silent(r2_extra_var <- rsq(ftmlm_object, select = c("hp", "wt", "extra_var")))
+    expect_type(r2_extra_var, "double")
+    expect_equal(r2_extra_var, rsq(ftmlm_object, select = c("hp", "wt")), tolerance = 1e-4)
+})

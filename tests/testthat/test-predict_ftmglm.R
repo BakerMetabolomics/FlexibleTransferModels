@@ -42,3 +42,9 @@ test_that("predict handles newdata with no overlapping variables", {
     bad_data <- data.frame(var1 = c(110, 150), var2 = c(2.5, 3.2), var3 = c(4, 6))
     expect_error(predict(ftmglm_object, newdata = bad_data), "No overlapping variables")
 })
+
+# Test that passing in more variables than available in the model works
+test_that("predict handles being passed more variables than available in the model works", {
+    new_data <- data.frame(hp = c(110, 150), wt = c(2.5, 3.2), cyl = c(4, 6), extra_var = c(1, 2))
+    expect_silent(predictions <- predict(ftmglm_object, newdata = new_data))
+})

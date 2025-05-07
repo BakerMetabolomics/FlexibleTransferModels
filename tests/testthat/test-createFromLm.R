@@ -6,7 +6,7 @@ test_that("createFromLm returns correctly structured ftmlm object", {
     expect_s4_class(result, "ftmlm")
     expect_true(is.matrix(slot(result, "XtX")))
     expect_true(is.matrix(slot(result, "Xty")))
-    expect_true(is.null(slot(result, "s")))
+    expect_equal(slot(result, "s"), 0)
     expect_equal(ncol(slot(result, "Xty")), 1)
     expect_equal(nrow(slot(result, "XtX")), ncol(model.matrix(lm_model)))
     expect_identical(colnames(slot(result, "Xty")), "mpg")

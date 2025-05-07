@@ -35,7 +35,7 @@ createFromLm <- function(lmObj, outcome_name = NULL) {
         stop("An intercept term should be included in the model.")
     }
 
-    # Calculate Xty and XtWX
+    # Calculate Xty and XtX
     Xty <- t(X) %*% y
     XtX <- t(X) %*% X
 
@@ -55,5 +55,10 @@ createFromLm <- function(lmObj, outcome_name = NULL) {
     colnames(Xty) <- outcome_name
 
     # Create ftmlm object
-    ftmlm(XtX = XtX, Xty = Xty, n = n, yty = yty, y_mean = y_mean)
+    ftmlm(XtX = XtX,
+          Xty = Xty,
+          s = 0,
+          n = n,
+          yty = yty,
+          y_mean = y_mean)
 }

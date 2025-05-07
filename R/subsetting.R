@@ -31,7 +31,9 @@ setMethod("subset", "ftmglm", function(x, subset) {
     }
 
     # Create a new ftmglm object
-    new_ftmglm <- new("ftmglm", XtWX = x@XtWX[subset, subset, drop = FALSE], XtWz = x@XtWz[subset, , drop = FALSE])
+    new_ftmglm <- new("ftmglm",
+                      XtWX = x@XtWX[subset, subset, drop = FALSE],
+                      XtWz = x@XtWz[subset, , drop = FALSE])
 
     # Return the new object
     return(new_ftmglm)
@@ -63,7 +65,13 @@ setMethod("subset", "ftmlm", function(x, subset) {
     }
 
     # Create a new ftmlm object
-    new_ftmlm <- new("ftmlm", XtX = x@XtX[subset, subset, drop = FALSE], Xty = x@Xty[subset, , drop = FALSE])
+    new_ftmlm <- new("ftmlm", 
+                     XtX = x@XtX[subset, subset, drop = FALSE],
+                     Xty = x@Xty[subset, , drop = FALSE],
+                     s = x@s,
+                     n = x@n,
+                     yty = x@yty,
+                     y_mean = x@y_mean)
 
     # Return the new object
     return(new_ftmlm)

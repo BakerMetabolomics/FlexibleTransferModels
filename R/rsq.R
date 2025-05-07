@@ -120,6 +120,11 @@ setMethod("rsq", "ftmlm",
         select <- intersect(select,
                             colnames(object@XtX))
 
+        # Ensure we have more than one variable
+        if (length(select) < 2 && select == "(Intercept)") {
+            stop("Ensure that at least two variables (including the intercept) are retained in the model.")
+        }
+
         # Subset object to the intersecting variables
         XtX <- object@XtX[select, select, drop = FALSE]
         Xty <- object@Xty[select, , drop = FALSE]

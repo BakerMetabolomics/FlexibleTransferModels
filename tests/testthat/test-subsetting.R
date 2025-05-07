@@ -54,3 +54,11 @@ test_that("subset handles non-existing variables", {
     expect_error(subset(ftmglm_object, subset = c("var1")), "at least two variables")
     expect_error(subset(ftmlm_object, subset = c("var1")), "at least two variables")
 })
+
+# Test subsetting works when asking for more variables than available
+test_that("subset handles more variables than available", {
+    expect_silent(result <- subset(ftmglm_object, subset = c("hp", "cyl", "var1")))
+    expect_s4_class(result, "ftmglm")
+    expect_equal(dim(result@XtWX), c(3, 3))  # Including intercept
+    expect_true(all(c("(Intercept)", "hp", "cyl") %in% colnames(result@XtWX)))
+})
