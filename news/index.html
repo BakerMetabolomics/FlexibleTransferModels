@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">FTM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,22 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.2" id="version-012-2025-05-07">Version 0.1.2 (2025-05-07)<a class="anchor" aria-label="anchor" href="#version-012-2025-05-07"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-and-minor-features-0-1-2">Bug Fixes and minor features<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-features-0-1-2"></a></h3>
+<ul><li>Fixed a bug where the model’s “s” parameter wasn’t always respected when using predict with ftmlm objects.</li>
+<li>Added the ability to estimate model performance (R2) for ftmlm objects (see: rsq function).
+<ul><li>Provides estimates of model performance given a subset of variables.</li>
+<li>Allows one to determine the approximate drop in performance for the proposed feature list.</li>
+</ul></li>
+<li>Estimating model performance requires storing a few extra parameters:
+<ul><li>n: sample size used in model fitting</li>
+<li>yty: sum of squared outcome values</li>
+<li>y_mean: mean of the outcome variable</li>
+</ul></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="version-011-2025-05-02">Version 0.1.1 (2025-05-02)<a class="anchor" aria-label="anchor" href="#version-011-2025-05-02"></a></h2>
 <div class="section level3">

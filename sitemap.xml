@@ -1,6 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/404.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/create_FTM.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/estimating_performance.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/extract_coefficient.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/index.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/articles/install_load.html</loc></url>
@@ -21,6 +22,8 @@
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/ftmlm.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/index.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/predict-ftmglm-method.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/rsq-ftmglm-method.html</loc></url>
+<url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/rsq.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/show-ftmglm-method.html</loc></url>
 <url><loc>https://bakermetabolomics.github.io/FlexibleTransferModels/reference/subset-ftmglm-method.html</loc></url>
 </urlset>
