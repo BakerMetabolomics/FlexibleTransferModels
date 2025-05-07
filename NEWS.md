@@ -1,5 +1,15 @@
 # FlexibleTransferModels
-# NEWS.md file to document the version history of the package.
+
+# Version 0.1.2 (2025-05-07)
+## Bug Fixes and minor features
+- Fixed a bug where the model's "s" parameter wasn't always respected when using predict with ftmlm objects.
+- Added the ability to estimate model performance (R2) for ftmlm objects (see: rsq function).
+  - Provides estimates of model performance given a subset of variables.
+  - Allows one to determine the approximate drop in performance for the proposed feature list.
+- Estimating model performance requires storing a few extra parameters:
+  - n: sample size used in model fitting
+  - yty: sum of squared outcome values
+  - y_mean: mean of the outcome variable
 
 # Version 0.1.1 (2025-05-02)
 ## Bug Fixes and minor features

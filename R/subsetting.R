@@ -17,13 +17,13 @@ setMethod("subset", "ftmglm", function(x, subset) {
         subset <- colnames(x@XtWX)[subset]
     }
 
-    # Get the intersection of the variables in the model and the subset
-    subset <- intersect(colnames(x@XtWX), subset)
-
     # Ensure "intercept" is included
     if (!"(Intercept)" %in% subset) {
         subset <- c("(Intercept)", subset)
     }
+
+    # Get the intersection of the variables in the model and the subset
+    subset <- intersect(colnames(x@XtWX), subset)
 
     # Ensure we have more than one variable
     if (length(subset) < 2) {
@@ -31,7 +31,9 @@ setMethod("subset", "ftmglm", function(x, subset) {
     }
 
     # Create a new ftmglm object
-    new_ftmglm <- new("ftmglm", XtWX = x@XtWX[subset, subset, drop = FALSE], XtWz = x@XtWz[subset, , drop = FALSE])
+    new_ftmglm <- new("ftmglm",
+                      XtWX = x@XtWX[subset, subset, drop = FALSE],
+                      XtWz = x@XtWz[subset, , drop = FALSE])
 
     # Return the new object
     return(new_ftmglm)
@@ -49,13 +51,13 @@ setMethod("subset", "ftmlm", function(x, subset) {
         subset <- colnames(x@XtX)[subset]
     }
 
-    # Get the intersection of the variables in the model and the subset
-    subset <- intersect(colnames(x@XtX), subset)
-
     # Ensure "intercept" is included
     if (!"(Intercept)" %in% subset) {
         subset <- c("(Intercept)", subset)
     }
+
+    # Get the intersection of the variables in the model and the subset
+    subset <- intersect(colnames(x@XtX), subset)
 
     # Ensure we have more than one variable
     if (length(subset) < 2) {
@@ -63,7 +65,13 @@ setMethod("subset", "ftmlm", function(x, subset) {
     }
 
     # Create a new ftmlm object
-    new_ftmlm <- new("ftmlm", XtX = x@XtX[subset, subset, drop = FALSE], Xty = x@Xty[subset, , drop = FALSE])
+    new_ftmlm <- new("ftmlm", 
+                     XtX = x@XtX[subset, subset, drop = FALSE],
+                     Xty = x@Xty[subset, , drop = FALSE],
+                     s = x@s,
+                     n = x@n,
+                     yty = x@yty,
+                     y_mean = x@y_mean)
 
     # Return the new object
     return(new_ftmlm)

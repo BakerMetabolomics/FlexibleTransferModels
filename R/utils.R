@@ -9,7 +9,7 @@ logistic_function <- function(x) {
 }
 
 # Helper function to validate input for models
-validate_input_input <- function(XtWX, XtWz, s = NULL) {
+validate_input_input <- function(XtWX, XtWz, s = NULL, n = NULL, yty = NULL, y_mean = NULL) {
     if (!is.matrix(XtWX) || !is.matrix(XtWz)) {
         stop("XtWX and XtWz must be matrices")
     }
@@ -18,6 +18,15 @@ validate_input_input <- function(XtWX, XtWz, s = NULL) {
     }
     if (!is.null(s) && !is.numeric(s)) {
         stop("s must be a numeric value")
+    }
+    if (!is.null(n) && !is.numeric(n)) {
+        stop("n must be a numeric value")
+    }
+    if (!is.null(yty) && !is.numeric(yty)) {
+        stop("yty must be a numeric value")
+    }
+    if (!is.null(y_mean) && !is.numeric(y_mean)) {
+        stop("y_mean must be a numeric value")
     }
 }
 

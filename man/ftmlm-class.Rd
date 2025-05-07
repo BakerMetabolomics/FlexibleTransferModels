@@ -22,6 +22,9 @@ regression analysis. It is not intended for direct use.
   \item{XtX}{\code{matrix} representing the cross product of the predictor variables.}
   \item{Xty}{\code{matrix} representing the cross product of the predictor variables and outcomes.}
   \item{s}{\code{numeric} representing the optimal Ridge penalty from cross-validation (if available).}
+  \item{n}{\code{numeric} representing the number of observations.}
+  \item{yty}{\code{numeric} representing the sum of squared responses.}
+  \item{y_mean}{\code{numeric} representing the mean of the outcome variable.}
 }
 }
 

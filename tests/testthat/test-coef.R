@@ -62,3 +62,15 @@ test_that("Error is thrown for negative s in ftmlm", {
 test_that("Error is thrown for non-numeric s in ftmlm", {
     expect_error(coef(ftmlm_object, s = "invalid"), "s must be numeric and positive")
 })
+
+# Test error handling for non-existent variable in ftmglm
+test_that("Error is thrown for non-existent variable in ftmglm", {
+    expect_error(coef(ftmglm_object, select = c("non_existent_var")), "at least two variables")
+})
+
+# Test coef when asking for more variables than available
+test_that("coef handles more variables than available in ftmglm", {
+    expect_silent(coeffs <- coef(ftmglm_object, select = c("hp", "wt", "var1")))
+    expect_length(coeffs, 3)  # Includes intercept by default
+    expect_named(coeffs, c("(Intercept)", "hp", "wt"))
+})

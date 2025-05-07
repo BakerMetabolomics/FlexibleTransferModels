@@ -7,7 +7,7 @@
 \usage{
 \S4method{predict}{ftmglm}(object, newdata, type = c("link", "response"))
 
-\S4method{predict}{ftmlm}(object, newdata, s = 0)
+\S4method{predict}{ftmlm}(object, newdata, s = NULL)
 }
 \arguments{
 \item{object}{Object of class inheriting from \code{ftmglm} or \code{ftmlm}.}

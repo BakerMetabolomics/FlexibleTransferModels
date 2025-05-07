@@ -48,6 +48,15 @@ setMethod("coef", "ftmglm",
         if (!"(Intercept)" %in% select) {
             select <- c("(Intercept)", select)
         }
+        
+        # Get the intersection of variables between select and model
+        select <- intersect(select,
+                            colnames(object@XtWX))
+
+        # Ensure we have more than one variable
+        if (length(select) < 2 && select == "(Intercept)") {
+            stop("Ensure that at least two variables (including the intercept) are retained in the model.")
+        }
 
         # Subset object to the intersecting variables
         XtWX <- object@XtWX[select, select, drop = FALSE]
@@ -92,12 +101,21 @@ setMethod("coef", "ftmlm",
 
         # If no variables are specified, select all variables
         if (is.null(select)) {
-          select <- colnames(object@XtX)
+            select <- colnames(object@XtX)
         }
 
         # Ensure that we select the intercept
         if (!"(Intercept)" %in% select) {
             select <- c("(Intercept)", select)
+        }
+        
+        # Get the intersection of variables between select and model
+        select <- intersect(select,
+                            colnames(object@XtX))
+
+        # Ensure we have more than one variable
+        if (length(select) < 2 && select == "(Intercept)") {
+            stop("Ensure that at least two variables (including the intercept) are retained in the model.")
         }
 
         # Subset object to the intersecting variables

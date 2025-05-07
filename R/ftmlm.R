@@ -14,11 +14,23 @@
 #'   \item{XtX}{\code{matrix} representing the cross product of the predictor variables.}
 #'   \item{Xty}{\code{matrix} representing the cross product of the predictor variables and outcomes.}
 #'   \item{s}{\code{numeric} representing the optimal Ridge penalty from cross-validation (if available).}
+#'   \item{n}{\code{numeric} representing the number of observations.}
+#'   \item{yty}{\code{numeric} representing the sum of squared responses.}
+#'   \item{y_mean}{\code{numeric} representing the mean of the outcome variable.}
 #'}
 #'
 #' @export
 setClass("ftmlm",
-         slots = list(XtX = "matrix", Xty = "matrix", s = "ANY"))
+         slots = list(XtX = "matrix",
+                      Xty = "matrix",
+                      s = "ANY",
+                      n = "numeric",
+                      yty = "numeric",
+                      y_mean = "numeric"),
+         prototype = prototype(s = 0,
+                               n = NA_real_,
+                               yty = NA_real_,
+                               y_mean = NA_real_))
 
 
 #' @title Constructor for ftmlm Objects
@@ -31,6 +43,9 @@ setClass("ftmlm",
 #' @param XtX A numeric matrix representing the cross product of predictors.
 #' @param Xty A numeric matrix representing the cross product of predictors and outcomes.
 #' @param s A numeric value representing the optimal Ridge penalty from cross-validation (if available).
+#' @param n A numeric value representing the number of observations.
+#' @param yty A numeric value representing the sum of squared responses.
+#' @param y_mean A numeric value representing the mean of the outcome variable.
 #'
 #' @return An object of class \code{\linkS4class{ftmlm}}.
 #'
@@ -42,8 +57,19 @@ setClass("ftmlm",
 #'   model <- ftmlm(XtX, Xty)
 #' }
 #' @export
-ftmlm <- function(XtX, Xty, s = NULL) {
-    validate_input_input(XtX, Xty, s)
-    new("ftmlm", XtX = XtX, Xty = Xty, s = s)
+ftmlm <- function(XtX,
+                  Xty,
+                  s = 0,
+                  n = NA_real_,
+                  yty = NA_real_,
+                  y_mean = NA_real_) {
+    validate_input_input(XtX, Xty, s, n, yty, y_mean)
+    new("ftmlm",
+        XtX = XtX,
+        Xty = Xty,
+        s = s,
+        n = n,
+        yty = yty,
+        y_mean = y_mean)
 }
 

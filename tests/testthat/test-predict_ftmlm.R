@@ -41,3 +41,9 @@ test_that("predict handles negative s values in ftmlm", {
     new_data <- data.frame(hp = c(110, 150), wt = c(2.5, 3.2), cyl = c(4, 6))
     expect_error(predict(ftmlm_object, newdata = new_data, s = -0.1), "s must be numeric and positive")
 })
+
+# Test that passing in more variables than available in the model works
+test_that("predict handles being passed more variables than available in the model works", {
+    new_data <- data.frame(hp = c(110, 150), wt = c(2.5, 3.2), cyl = c(4, 6), extra_var = c(1, 2))
+    expect_silent(predictions <- predict(ftmlm_object, newdata = new_data))
+})
