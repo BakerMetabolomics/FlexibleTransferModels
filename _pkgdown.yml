@@ -35,7 +35,9 @@ reference:
 - title: Use a flexible transfer model to predict new data
   desc: |
     Learn how to use a flexible transfer model to predict new data, even when there are missing variables
-  contents: predict,ftmglm-method
+  contents:
+  - predict,ftmglm-method
+  - predict,ftmlm-method
 - title: Explore the structure of a flexible transfer model
   desc: |
     See constructors and classes for flexible transfer models
@@ -44,6 +46,18 @@ reference:
   - ftmlm-class
   - ftmglm
   - ftmlm
+- title: Estimating performance when you have fewer variables
+  desc: |
+    Learn how to estimate performance when you have fewer variables
+  contents:
+  - rsq,ftmglm-method
+  - rsq
+- title: Use a flexible transfer model to predict new data
+  desc: |
+    Learn how to use a flexible transfer model to predict new data, even when there are missing variables
+  contents:
+  - predict,ftmglm-method
+  - predict,ftmlm-method
 articles:
 - title: Reason to use FTM
   contents: reason_to_use_FTM
@@ -55,4 +69,6 @@ articles:
   contents: extract_coefficient
 - title: Predicting in new datasets using FTM
   contents: predicting_in_newdata
+- title: Estimating performance of FTM models
+  contents: estimating_performance
 
