@@ -17,13 +17,13 @@ setMethod("subset", "ftmglm", function(x, subset) {
         subset <- colnames(x@XtWX)[subset]
     }
 
-    # Get the intersection of the variables in the model and the subset
-    subset <- intersect(colnames(x@XtWX), subset)
-
     # Ensure "intercept" is included
     if (!"(Intercept)" %in% subset) {
         subset <- c("(Intercept)", subset)
     }
+
+    # Get the intersection of the variables in the model and the subset
+    subset <- intersect(colnames(x@XtWX), subset)
 
     # Ensure we have more than one variable
     if (length(subset) < 2) {
@@ -49,13 +49,13 @@ setMethod("subset", "ftmlm", function(x, subset) {
         subset <- colnames(x@XtX)[subset]
     }
 
-    # Get the intersection of the variables in the model and the subset
-    subset <- intersect(colnames(x@XtX), subset)
-
     # Ensure "intercept" is included
     if (!"(Intercept)" %in% subset) {
         subset <- c("(Intercept)", subset)
     }
+
+    # Get the intersection of the variables in the model and the subset
+    subset <- intersect(colnames(x@XtWX), subset)
 
     # Ensure we have more than one variable
     if (length(subset) < 2) {

@@ -75,6 +75,8 @@ setGeneric("rsq",
 #' @include ftmglm.R ftmlm.R
 setMethod("rsq", "ftmglm",
     function(object, select = NULL, s = NULL) {
+        ## Warn user this is not implemented yet
+        stop("R-squared calculation for ftmglm objects is not implemented yet.")
     }
 )
 
@@ -97,13 +99,11 @@ setMethod("rsq", "ftmlm",
 
         # Check if the object contains the necessary slots
         if (!all(c("yty", "n", "y_mean") %in% slotNames(object))) {
-            message("The object does not contain the necessary slots for R-squared calculation.")
-            return(NA)
+            stop("The object does not contain the necessary slots for R-squared calculation.")
         }
         # Check if the object has NAs in the yty, n, or y_mean slots
         if (any(is.na(object@yty), is.na(object@n), is.na(object@y_mean))) {
-            message("The object contains NAs in the yty, n, or y_mean slots.")
-            return(NA)
+            stop("The object contains NAs in the yty, n, or y_mean slots.")
         }
 
         # If no variables are specified, select all variables
@@ -115,6 +115,10 @@ setMethod("rsq", "ftmlm",
         if (!"(Intercept)" %in% select) {
             select <- c("(Intercept)", select)
         }
+        
+        # Get the intersection of variables between select and model
+        select <- intersect(select,
+                            colnames(object@XtX))
 
         # Subset object to the intersecting variables
         XtX <- object@XtX[select, select, drop = FALSE]
