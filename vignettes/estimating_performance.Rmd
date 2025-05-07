@@ -1,0 +1,70 @@
+---
+title: "Estimating performance when you have fewer variables"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Estimating performance when you have fewer variables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+## load packages
+library(glmnet)
+library(FTM)
+```
+
+# Using FTMlm objects to estimate the model performance
+FTMlm objects allow for the estimation of model performance (R2) for the full model and a model using a subset of variables. This can be done using the `rsq` function.
+
+```{r}
+# Load the mtcars dataset
+data(mtcars)
+
+# Fit a linear model to the mtcars dataset, predicting mpg from cyl, hp, and wt
+lm_model <- lm(mpg ~ cyl + hp + wt, data = mtcars)
+
+# Create FTM object using createFTM
+ftmlm_model <- createFTM(lm_model) # same as using createFromLm
+
+# Calculate the model performance
+rsq(ftmlm_model)
+
+# Check the linear model R2
+summary(lm_model)$r.squared
+```
+
+Notice the ftmlm model reports the R2 value and that it matches the linear model it was created from. This R2 value was calculated using the parameters stored within the object.
+
+# Estimating model performance when using a subset of variables
+
+```{r}
+# Calculate the model performance for a model using just cyl + wt
+rsq(ftmlm_model, select = c("cyl", "wt"))
+
+# Verify we get the same performance as a de novo model
+summary(lm(mpg ~ cyl + wt, data = mtcars))$r.squared
+
+
+# Calculate the model performance for a model using just hp
+rsq(ftmlm_model, select = c("hp"))
+
+# Verify we get the same performance as a de novo model
+summary(lm(mpg ~ hp, data = mtcars))$r.squared
+```
+
+# Notes
+
+## Ridge penalties
+
+Estimating model performance with a ridge penalty causes the solution to not be exact. The estimate is often rather good, but may slightly under/over estimate the model performance. If this of concern, compare the model performance with the optimal `s` and with `s = 0`. If these are similar, consider using the estimate from the non-ridge penalty model.
+
+## GLM models
+
+Currently, the estimation of model performance hasn't been implemented for ftmglm models. Once we are happy with a solution, we will implement this feature.
