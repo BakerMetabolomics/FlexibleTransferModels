@@ -15,7 +15,7 @@
 #' \itemize{
 #'   \item Identifying variables common to both the model and the new data.
 #'   \item Preparing the data by subsetting to these intersecting variables and including an intercept.
-#'   \item Inverting the XtWX or XtX matrix, including a ridge penalty or using truncated SVD to handle
+#'   \item Inverting the XtWX or XtX matrix, including a ridge penalty or using Moore-Penrose generalized inverse to handle
 #'   potentially singular matrices.
 #'   \item Estimating coefficients and calculating predictions based on the specified type.
 #' }
@@ -57,6 +57,7 @@
 #'
 #' @export
 #' @include ftmglm.R ftmlm.R
+#' @importFrom MASS ginv
 setMethod("predict", "ftmglm",
     function(object, newdata, type = c("link", "response")) {
 
@@ -100,14 +101,8 @@ setMethod("predict", "ftmglm",
         # Compute the design matrix
         X <- as.matrix(newdata)
 
-        # Perform SVD on the XtWX matrix
-        XtWX_SVD <- svd(XtWX)
-
-        # Get the inverse of the eigen values that are greater than 1e-16
-        eigenvalues <- 1 / XtWX_SVD$d[XtWX_SVD$d > 1e-16]
-
-        ## Calculate the truncated SVD inverse
-        XtWX_inv <- XtWX_SVD$u[, seq(length(eigenvalues))] %*% diag(eigenvalues) %*% t(XtWX_SVD$v[, seq(length(eigenvalues))])
+        # Invert the XtWX matrix using MASS::ginv
+        XtWX_inv <- MASS::ginv(XtWX)
 
         # Estimate the beta coefficients
         beta <- XtWX_inv %*% XtWz

@@ -73,6 +73,7 @@ setGeneric("rsq",
 #' @export
 #' @importFrom methods slotNames
 #' @include ftmglm.R ftmlm.R
+#' @importFrom MASS ginv
 setMethod("rsq", "ftmglm",
     function(object, select = NULL, s = NULL) {
         ## Warn user this is not implemented yet
@@ -139,18 +140,12 @@ setMethod("rsq", "ftmlm",
             ridge_diag <- c(0, s * diag(XtX_comp))
 
             # Calculate the inverse of XtX + lambda * I, accounting for the scale of variables
-            XtX_inv <- solve(XtX + diag(ridge_diag, nrow = nrow(XtX), ncol = ncol(XtX)))
+            XtX_inv <- MASS::ginv(XtX + diag(ridge_diag, nrow = nrow(XtX), ncol = ncol(XtX)))
 
         } else {
 
-            # Perform SVD on the XtX matrix
-            XtX_SVD <- svd(XtX)
-
-            # Get the inverse of the eigen values that are greater than 1e-16
-            eigenvalues <- 1 / XtX_SVD$d[XtX_SVD$d > 1e-16]
-
-            # Calculate the truncated SVD inverse
-            XtX_inv <- XtX_SVD$u[, seq(length(eigenvalues))] %*% diag(eigenvalues) %*% t(XtX_SVD$v[, seq(length(eigenvalues))])
+            # Invert the XtX matrix using MASS::ginv
+            XtX_inv <- MASS::ginv(XtX)
 
         }
 
