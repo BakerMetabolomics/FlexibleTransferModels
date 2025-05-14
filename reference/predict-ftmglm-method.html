@@ -9,7 +9,7 @@ This method utilizes the intersecting variables between the model's predictors a
 
     <a class="navbar-brand me-2" href="../index.html">FTM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,7 @@ if <code>"response"</code>, these are the probabilities, transformed via the log
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The predict method works by:</p><ul><li><p>Identifying variables common to both the model and the new data.</p></li>
 <li><p>Preparing the data by subsetting to these intersecting variables and including an intercept.</p></li>
-<li><p>Inverting the XtWX or XtX matrix, including a ridge penalty or using truncated SVD to handle
+<li><p>Inverting the XtWX or XtX matrix, including a ridge penalty or using Moore-Penrose generalized inverse to handle
   potentially singular matrices.</p></li>
 <li><p>Estimating coefficients and calculating predictions based on the specified type.</p></li>
 </ul><p>It is crucial that <code>newdata</code> contains variables that intersect with the model's predictors.

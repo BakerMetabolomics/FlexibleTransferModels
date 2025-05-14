@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">FTM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@ argument can be used to extract coefficients for specific variables
 <span><span class="co"># This also works for FTM objects made from glmnet models</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">ftmglmnet_model</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   (Intercept)            hp            wt           cyl </span></span>
-<span><span class="co">#&gt;  1.166828e+01  1.943383e-02 -4.860874e+00  1.032507e-12</span></span>
+<span><span class="co">#&gt;  1.166828e+01  1.943383e-02 -4.860874e+00 -1.016964e-13</span></span>
 <span></span>
 <span><span class="co"># Finally, you can extract beta coefficients after reweighting for a subset of variables from a ftmglmnet model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">ftmglmnet_model</span>, select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cyl"</span>, <span class="st">"hp"</span><span class="op">)</span><span class="op">)</span></span>
