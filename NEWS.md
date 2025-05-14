@@ -1,5 +1,11 @@
 # FlexibleTransferModels
 
+# Version 0.1.3 (2025-05-14)
+## Bug Fixes and Enhancements
+- Switching from solve and (Moore-Penrose) psuedoinverse to MASS::ginv.
+- Should provide (practically) identical results, but catches a few specific edge cases.
+  - It was possible that the ridge penalty was very small and XtX would still be singular.
+
 # Version 0.1.2 (2025-05-07)
 ## Bug Fixes and minor features
 - Fixed a bug where the model's "s" parameter wasn't always respected when using predict with ftmlm objects.

@@ -33,7 +33,7 @@ The predict method works by:
 \itemize{
   \item Identifying variables common to both the model and the new data.
   \item Preparing the data by subsetting to these intersecting variables and including an intercept.
-  \item Inverting the XtWX or XtX matrix, including a ridge penalty or using truncated SVD to handle
+  \item Inverting the XtWX or XtX matrix, including a ridge penalty or using Moore-Penrose generalized inverse to handle
   potentially singular matrices.
   \item Estimating coefficients and calculating predictions based on the specified type.
 }
