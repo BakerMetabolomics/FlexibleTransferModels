@@ -1,7 +1,7 @@
 Package: FTM
 Type: Package
 Title: Flexible Transfer Models
-Version: 0.1.2
+Version: 0.1.3
 Author: Corey Giles [aut, cre],
   Changyu Yi [aut]
 Authors@R: c(person("Corey", "Giles", role = c("aut", "cre"),
@@ -25,7 +25,8 @@ LazyData: true
 RoxygenNote: 7.3.2
 Imports:
     methods,
-    glmnet
+    glmnet,
+    MASS
 Collate: 
     'ftmlm.R'
     'ftmglm.R'
