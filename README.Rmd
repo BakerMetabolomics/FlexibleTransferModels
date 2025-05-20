@@ -26,7 +26,7 @@ FTM - Flexible Transfer Models
 </p>
 
 ::: {align="center"}
-<a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&amp;logo=r&amp;logoColor=white" alt="R"/></a> <a href="https://www.baker.edu.au/"><img src="https://img.shields.io/badge/Baker-%23276DC3?style=for-the-badge" alt="Baker Institute"/></a> <br>
+<a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&amp;logo=r&amp;logoColor=white" alt="R"/></a> <a href="https://www.baker.edu.au/"><img src="https://img.shields.io/badge/Baker-%23276DC3?style=for-the-badge" alt="Baker Institute"/></a> <a href="https://doi.org/10.1016/j.jlr.2025.100800"><img src="https://img.shields.io/badge/DOI-10.1016/j.jlr.2025.100800-%23276DC3?style=for-the-badge&amp;logo=doi&amp;logoColor=white" alt="https://doi.org/10.1016/j.jlr.2025.100800"/></a> <br>
 
 <p align="center">
 
