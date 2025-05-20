@@ -155,3 +155,11 @@ For any inquiries, please contact:
 
 For a detailed list of changes, improvements, and bug fixes, please
 refer to the [NEWS.md](NEWS.md) file.
+
+## Citation
+
+If you use this package in your work, please cite our publication. Yi C,
+Huynh K, Schooneveldt Y, Olshansky G, Liang A, Wang T, et al. Statin
+effects on the lipidome: Predicting statin usage and implications for
+cardiovascular risk prediction. Journal of Lipid Research.
+2025;66(5):100800. <https://doi.org/10.1016/j.jlr.2025.100800>.

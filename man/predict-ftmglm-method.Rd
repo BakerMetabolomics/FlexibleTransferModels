@@ -5,9 +5,9 @@
 \alias{predict,ftmlm-method}
 \title{Predict Method for Flexible Transfer Models (ftmglm and ftmlm)}
 \usage{
-\S4method{predict}{ftmglm}(object, newdata, type = c("link", "response"))
+\S4method{predict}{ftmglm}(object, newdata, type = c("link", "response"), ...)
 
-\S4method{predict}{ftmlm}(object, newdata, s = NULL)
+\S4method{predict}{ftmlm}(object, newdata, s = NULL, ...)
 }
 \arguments{
 \item{object}{Object of class inheriting from \code{ftmglm} or \code{ftmlm}.}
