@@ -1,21 +1,29 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <h1 align="center">
+
 FTM - Flexible Transfer Models
+
 </h1>
 <p align="center">
+
 <i>Seamlessly transfer omics models between datasets with varying
 predictors.</i>
+
 </p>
 
 <div align="center">
 
-<a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white" alt="R"/></a>
+<a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&amp;logo=r&amp;logoColor=white" alt="R"/></a>
 <a href="https://www.baker.edu.au/"><img src="https://img.shields.io/badge/Baker-%23276DC3?style=for-the-badge" alt="Baker Institute"/></a>
+<a href="https://doi.org/10.1016/j.jlr.2025.100800"><img src="https://img.shields.io/badge/DOI-10.1016/j.jlr.2025.100800-%23276DC3?style=for-the-badge&amp;logo=doi&amp;logoColor=white" alt="https://doi.org/10.1016/j.jlr.2025.100800"/></a>
 <br>
+
 <p align="center">
+
 <i>Love our work? Visit our
 <a href="https://metabolomics.baker.edu.au/">WebPortal</a>.</i>
+
 </p>
 
 </div>
@@ -158,8 +166,9 @@ refer to the [NEWS.md](NEWS.md) file.
 
 ## Citation
 
-If you use this package in your work, please cite our publication. Yi C,
-Huynh K, Schooneveldt Y, Olshansky G, Liang A, Wang T, et al. Statin
-effects on the lipidome: Predicting statin usage and implications for
-cardiovascular risk prediction. Journal of Lipid Research.
-2025;66(5):100800. <https://doi.org/10.1016/j.jlr.2025.100800>.
+If you use this package in your work, please cite our publication.  
+Yi C, Huynh K, Schooneveldt Y, Olshansky G, Liang A, Wang T, et
+al. Statin effects on the lipidome: Predicting statin usage and
+implications for cardiovascular risk prediction. Journal of Lipid
+Research. 2025;66(5):100800.
+<https://doi.org/10.1016/j.jlr.2025.100800>.
