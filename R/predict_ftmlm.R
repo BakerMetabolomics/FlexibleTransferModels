@@ -2,7 +2,7 @@
 #' @rdname predict-ftmglm-method
 #' @export
 setMethod("predict", "ftmlm",
-    function(object, newdata, s = NULL) {
+    function(object, newdata, s = NULL, ...) {
 
         # Validation for object
         if (!inherits(object, "ftmlm")) {

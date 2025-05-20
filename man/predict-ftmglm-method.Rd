@@ -5,9 +5,9 @@
 \alias{predict,ftmlm-method}
 \title{Predict Method for Flexible Transfer Models (ftmglm and ftmlm)}
 \usage{
-\S4method{predict}{ftmglm}(object, newdata, type = c("link", "response"))
+\S4method{predict}{ftmglm}(object, newdata, type = c("link", "response"), ...)
 
-\S4method{predict}{ftmlm}(object, newdata, s = NULL)
+\S4method{predict}{ftmlm}(object, newdata, s = NULL, ...)
 }
 \arguments{
 \item{object}{Object of class inheriting from \code{ftmglm} or \code{ftmlm}.}
@@ -17,6 +17,8 @@ the predictors used in the model training.}
 
 \item{type}{A character string specifying the type of prediction: either \code{"response"}
 for predicted probabilities, or \code{"link"} (default) for linear predictors.}
+
+\item{...}{Additional arguments passed to the predict method.}
 
 \item{s}{Ridge penalty to apply during flexible reweighting. Default is the stored optimal penalty, or 0 if missing.}
 }
